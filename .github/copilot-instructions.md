@@ -80,3 +80,4 @@ Always write one test at a time, make it run, then improve structure. Always run
 
 ## Tests
 -  Test method names should be a sentence describing the behaviour being tested in present tense, e.g. `fighterDiesWhenHitPointsReachZero`, `fighterWithWeaponDealsMoreDamageThanWithout`, `criticalHitDealsDoubleDamage`, etc.
+- Don't write comments in tests unless absolutely necessary. The test itself should be self-explanatory.

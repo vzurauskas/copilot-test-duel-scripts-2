@@ -8,7 +8,14 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 ### Phase 1: Core Combat Turn
 **Objective**: Two fighters can engage in a single turn of combat
 
-#### Test 1: Basic Combat Turn with Both Strikes Landing
+#### Test 1: Simple Single Strike
+- [x] `oneStrikesAnotherInHead()`
+  - Two fighters with 100 HP each
+  - Alice strikes Bob's HEAD
+  - No parrying mechanics yet
+  - Bob should take damage and have reduced HP
+
+#### Test 2: Basic Combat Turn with Both Strikes Landing
 - [ ] `bothStrikesLandWhenNoParrying()`
   - Two fighters with 100 HP each
   - Alice strikes Bob's HEAD, parries LEGS
@@ -16,13 +23,13 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Both strikes land (no parrying blocks them)
   - Both fighters should have reduced HP
 
-#### Test 2: Strike Blocked by Parrying
+#### Test 3: Strike Blocked by Parrying
 - [ ] `strikeIsBlockedByParrying()`
   - Alice strikes Bob's HEAD, Bob parries HEAD
   - Alice's strike should be completely blocked
   - Bob should take no damage
 
-#### Test 3: Damage Varies by Body Part
+#### Test 4: Damage Varies by Body Part
 - [ ] `damageVariesByBodyPart()`
   - Test HEAD strikes deal more damage than TORSO
   - Test TORSO strikes deal more damage than LEGS
@@ -31,13 +38,13 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 ### Phase 2: Fighter Properties and State
 **Objective**: Fighters have proper attributes and state management
 
-#### Test 4: Fighter Creation and Properties
+#### Test 5: Fighter Creation and Properties
 - [ ] `fighterHasNameAndHitPoints()`
   - Fighter has name, hit points
   - Can retrieve all properties correctly
   - Fighter starts alive with full HP
 
-#### Test 5: Fighter Death State
+#### Test 6: Fighter Death State
 - [ ] `fighterDiesWhenHitPointsReachZero()`
   - Fighter with 1 HP takes damage
   - Fighter becomes dead (not alive)
@@ -46,12 +53,12 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 ### Phase 3: Weapon System
 **Objective**: Fighters use weapons that affect damage calculation
 
-#### Test 6: Basic Weapon Damage
+#### Test 7: Basic Weapon Damage
 - [ ] `weaponAffectsDamageCalculation()`
   - Fighter with stronger weapon deals more damage
   - Base damage calculation includes weapon damage
 
-#### Test 7: Critical Hit System
+#### Test 8: Critical Hit System
 - [ ] `criticalHitDealsDoubleDamage()`
   - Weapons have critical hit chance
   - Critical hits deal double damage
@@ -60,13 +67,13 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 ### Phase 4: Complete Combat System
 **Objective**: Full turn resolution with all mechanics
 
-#### Test 8: Complex Combat Scenario
+#### Test 9: Complex Combat Scenario
 - [ ] `complexCombatScenarioWorksCorrectly()`
   - Multiple mechanics working together
   - Weapon damage + body part multipliers + critical hits
   - Proper damage calculation and HP updates
 
-#### Test 9: Combat Result Information
+#### Test 10: Combat Result Information
 - [ ] `combatResultContainsCompleteInformation()`
   - Combat result includes damage dealt to each fighter
   - Shows which strikes landed vs blocked
