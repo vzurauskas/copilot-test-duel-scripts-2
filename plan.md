@@ -1,0 +1,85 @@
+# Duel Scripts 2 - TDD Implementation Plan
+
+## Goal
+Implement a turn-based combat system where two fighters can engage in combat, strike each other, and take damage based on body part targeting and parrying mechanics.
+
+## Implementation Plan
+
+### Phase 1: Core Combat Turn
+**Objective**: Two fighters can engage in a single turn of combat
+
+#### Test 1: Basic Combat Turn with Both Strikes Landing
+- [ ] `bothStrikesLandWhenNoParrying()`
+  - Two fighters with 100 HP each
+  - Alice strikes Bob's HEAD, parries LEGS
+  - Bob strikes Alice's TORSO, parries HEAD  
+  - Both strikes land (no parrying blocks them)
+  - Both fighters should have reduced HP
+
+#### Test 2: Strike Blocked by Parrying
+- [ ] `strikeIsBlockedByParrying()`
+  - Alice strikes Bob's HEAD, Bob parries HEAD
+  - Alice's strike should be completely blocked
+  - Bob should take no damage
+
+#### Test 3: Damage Varies by Body Part
+- [ ] `damageVariesByBodyPart()`
+  - Test HEAD strikes deal more damage than TORSO
+  - Test TORSO strikes deal more damage than LEGS
+  - Verify damage multipliers work correctly
+
+### Phase 2: Fighter Properties and State
+**Objective**: Fighters have proper attributes and state management
+
+#### Test 4: Fighter Creation and Properties
+- [ ] `fighterHasNameAndHitPoints()`
+  - Fighter has name, hit points
+  - Can retrieve all properties correctly
+  - Fighter starts alive with full HP
+
+#### Test 5: Fighter Death State
+- [ ] `fighterDiesWhenHitPointsReachZero()`
+  - Fighter with 1 HP takes damage
+  - Fighter becomes dead (not alive)
+  - Dead fighters cannot participate in combat
+
+### Phase 3: Weapon System
+**Objective**: Fighters use weapons that affect damage calculation
+
+#### Test 6: Basic Weapon Damage
+- [ ] `weaponAffectsDamageCalculation()`
+  - Fighter with stronger weapon deals more damage
+  - Base damage calculation includes weapon damage
+
+#### Test 7: Critical Hit System
+- [ ] `criticalHitDealsDoubleDamage()`
+  - Weapons have critical hit chance
+  - Critical hits deal double damage
+  - Critical hit calculation works correctly
+
+### Phase 4: Complete Combat System
+**Objective**: Full turn resolution with all mechanics
+
+#### Test 8: Complex Combat Scenario
+- [ ] `complexCombatScenarioWorksCorrectly()`
+  - Multiple mechanics working together
+  - Weapon damage + body part multipliers + critical hits
+  - Proper damage calculation and HP updates
+
+#### Test 9: Combat Result Information
+- [ ] `combatResultContainsCompleteInformation()`
+  - Combat result includes damage dealt to each fighter
+  - Shows which strikes landed vs blocked
+  - Indicates critical hits
+
+## Success Criteria
+- All tests pass
+- Clean, readable code with no duplication
+- Proper separation of concerns
+- Core combat mechanics fully functional
+- Foundation ready for scripting system (Phase 5)
+
+## Notes
+- Each test should be implemented one at a time following Red-Green-Refactor
+- Commit after each green test with proper structural/behavioral change designation
+- Keep implementations minimal - only enough code to make tests pass
