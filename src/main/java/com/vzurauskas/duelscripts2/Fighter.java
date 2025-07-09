@@ -15,6 +15,14 @@ public class Fighter {
         return hitPoints;
     }
 
+    public String name() {
+        return name;
+    }
+
+    public boolean isAlive() {
+        return hitPoints > 0;
+    }
+
     public void parry(BodyPart bodyPart) {
         this.parryingBodyPart = bodyPart;
     }

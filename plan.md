@@ -43,7 +43,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 **Objective**: Fighters have proper attributes and state management
 
 #### Test 6: Fighter Creation and Properties
-- [ ] `fighterHasNameAndHitPoints()`
+- [x] `fighterHasNameAndHitPoints()`
   - Fighter has name, hit points
   - Can retrieve all properties correctly
   - Fighter starts alive with full HP

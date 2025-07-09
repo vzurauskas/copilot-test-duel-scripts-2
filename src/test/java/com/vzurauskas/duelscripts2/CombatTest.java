@@ -75,4 +75,13 @@ class CombatTest {
         assertTrue(headDamage > torsoDamage);
         assertTrue(torsoDamage > legsDamage);
     }
+
+    @Test
+    void fighterHasNameAndHitPoints() {
+        Fighter fighter = new Fighter("Alice", 100);
+        
+        assertEquals("Alice", fighter.name());
+        assertEquals(100, fighter.hitPoints());
+        assertTrue(fighter.isAlive());
+    }
 }
