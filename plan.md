@@ -30,11 +30,8 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Both strikes land (no parrying blocks them)
   - Both fighters should have reduced HP
 
-#### Test 4: Strike Blocked by Parrying
-- [ ] `strikeIsBlockedByParrying()`
-  - Alice strikes Bob's HEAD, Bob parries HEAD
-  - Alice's strike should be completely blocked
-  - Bob should take no damage
+#### Test 4: Basic Combat Turn with Both Strikes Parried
+- [x] `bothStrikesAreBlockedWhenParrying()`
 
 #### Test 5: Damage Varies by Body Part
 - [ ] `damageVariesByBodyPart()`
