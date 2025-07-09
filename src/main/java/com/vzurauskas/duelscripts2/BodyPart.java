@@ -12,8 +12,4 @@ public enum BodyPart {
     public double multiplier() {
         return multiplier;
     }
-    
-    public int damage() {
-        return (int)(15 * multiplier); // Keep backward compatibility
-    }
 }
