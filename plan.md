@@ -66,7 +66,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Hit damage = weapon damage * body part modifier.
 
 #### Test 10: Critical Hit System
-- [ ] `criticalHitDealsDoubleDamage()`
+- [x] `criticalHitDealsDoubleDamage()`
   - Weapons have critical hit chance
   - Critical hits deal double damage
   - Critical hit calculation works correctly

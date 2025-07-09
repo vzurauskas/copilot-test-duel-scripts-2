@@ -32,6 +32,11 @@ public class Fighter {
     public void strike(Fighter target, BodyPart bodyPart) {
         if (target.parryingBodyPart != bodyPart) {
             int damage = (int)(weapon.damage() * bodyPart.multiplier());
+            
+            if (Math.random() < weapon.criticalHitChance()) {
+                damage *= 2; 
+            }
+            
             target.hitPoints -= damage;
         }
     }

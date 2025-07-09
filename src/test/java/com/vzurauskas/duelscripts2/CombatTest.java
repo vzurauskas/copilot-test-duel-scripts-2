@@ -128,4 +128,20 @@ class CombatTest {
         
         assertEquals(expectedDamage, actualDamage);
     }
+
+    @Test
+    void criticalHitDealsDoubleDamage() {
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        // Weapon with 100% critical hit chance for testing
+        Weapon criticalWeapon = new Weapon("Critical Sword", 10, 1.0);
+        alice.equipWeapon(criticalWeapon);
+        
+        alice.strike(bob, BodyPart.HEAD);
+        int actualDamage = 100 - bob.hitPoints();
+        
+        int expectedCriticalDamage = (int)((10 * 1.7) * 2);
+        assertEquals(expectedCriticalDamage, actualDamage);
+    }
 }
