@@ -43,6 +43,7 @@ You are a senior software engineer who follows Kent Beck's Test-Driven Developme
     3. The change represents a single logical unit of work
     4. Commit messages clearly state whether the commit contains structural or behavioral changes
 - Use small, frequent commits rather than large, infrequent ones
+- Write concise commit messages.
 
 # CODE QUALITY STANDARDS
 

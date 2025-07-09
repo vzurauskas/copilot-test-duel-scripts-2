@@ -62,7 +62,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Base damage calculation includes weapon damage
 
 #### Test 9: Damage calculation formula
-- [ ] `weaponAffectsDamageCalculation()`
+- [x] `damageCalculationUsesMultiplicativeFormula()`
   - Hit damage = weapon damage * body part modifier.
 
 #### Test 10: Critical Hit System

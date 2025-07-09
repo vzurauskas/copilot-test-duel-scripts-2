@@ -114,4 +114,18 @@ class CombatTest {
         
         assertTrue(weaponDamage > baseDamage);
     }
+
+    @Test
+    void damageCalculationUsesMultiplicativeFormula() {
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        alice.equipWeapon(new Weapon("Sword", 12));
+        
+        alice.strike(bob, BodyPart.HEAD);
+        int expectedDamage = (int)(12 * 1.7); 
+        int actualDamage = 100 - bob.hitPoints();
+        
+        assertEquals(expectedDamage, actualDamage);
+    }
 }

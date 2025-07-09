@@ -10,7 +10,7 @@ public class Fighter {
         this.name = name;
         this.hitPoints = hitPoints;
         this.parryingBodyPart = BodyPart.TORSO;
-        this.weapon = new Weapon("Fist", 0);
+        this.weapon = new Weapon("Fist", 3);
     }
 
     public int hitPoints() {
@@ -31,9 +31,8 @@ public class Fighter {
 
     public void strike(Fighter target, BodyPart bodyPart) {
         if (target.parryingBodyPart != bodyPart) {
-            int baseDamage = bodyPart.damage();
-            int weaponDamage = weapon.damage();
-            target.hitPoints -= (baseDamage + weaponDamage);
+            int damage = (int)(weapon.damage() * bodyPart.multiplier());
+            target.hitPoints -= damage;
         }
     }
 
