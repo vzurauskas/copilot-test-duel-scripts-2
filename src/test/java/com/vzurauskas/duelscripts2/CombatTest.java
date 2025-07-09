@@ -84,4 +84,16 @@ class CombatTest {
         assertEquals(100, fighter.hitPoints());
         assertTrue(fighter.isAlive());
     }
+
+    @Test
+    void fighterDiesWhenHitPointsReachZero() {
+        Fighter alice = new Fighter("Alice", 1);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        assertTrue(alice.isAlive());
+        
+        bob.strike(alice, BodyPart.HEAD);
+        
+        assertFalse(alice.isAlive());
+    }
 }

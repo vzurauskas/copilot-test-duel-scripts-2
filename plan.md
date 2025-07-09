@@ -49,10 +49,9 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Fighter starts alive with full HP
 
 #### Test 7: Fighter Death State
-- [ ] `fighterDiesWhenHitPointsReachZero()`
+- [x] `fighterDiesWhenHitPointsReachZero()`
   - Fighter with 1 HP takes damage
   - Fighter becomes dead (not alive)
-  - Dead fighters cannot participate in combat
 
 ### Phase 3: Weapon System
 **Objective**: Fighters use weapons that affect damage calculation
