@@ -21,7 +21,7 @@ public class Fighter {
 
     public void strike(Fighter target, BodyPart bodyPart) {
         if (target.parryingBodyPart != bodyPart) {
-            target.hitPoints -= 10;
+            target.hitPoints -= bodyPart.getDamage();
         }
     }
 }

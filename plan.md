@@ -34,7 +34,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 - [x] `bothStrikesAreBlockedWhenParrying()`
 
 #### Test 5: Damage Varies by Body Part
-- [ ] `damageVariesByBodyPart()`
+- [x] `damageVariesByBodyPart()`
   - Test HEAD strikes deal more damage than TORSO
   - Test TORSO strikes deal more damage than LEGS
   - Verify damage multipliers work correctly
