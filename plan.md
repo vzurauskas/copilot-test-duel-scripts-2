@@ -57,11 +57,15 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 **Objective**: Fighters use weapons that affect damage calculation
 
 #### Test 8: Basic Weapon Damage
-- [ ] `weaponAffectsDamageCalculation()`
+- [x] `weaponAffectsDamageCalculation()`
   - Fighter with stronger weapon deals more damage
   - Base damage calculation includes weapon damage
 
-#### Test 9: Critical Hit System
+#### Test 9: Damage calculation formula
+- [ ] `weaponAffectsDamageCalculation()`
+  - Hit damage = weapon damage * body part modifier.
+
+#### Test 10: Critical Hit System
 - [ ] `criticalHitDealsDoubleDamage()`
   - Weapons have critical hit chance
   - Critical hits deal double damage
@@ -70,13 +74,13 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 ### Phase 4: Complete Combat System
 **Objective**: Full turn resolution with all mechanics
 
-#### Test 10: Complex Combat Scenario
+#### Test 11: Complex Combat Scenario
 - [ ] `complexCombatScenarioWorksCorrectly()`
   - Multiple mechanics working together
   - Weapon damage + body part multipliers + critical hits
   - Proper damage calculation and HP updates
 
-#### Test 11: Combat Result Information
+#### Test 12: Combat Result Information
 - [ ] `combatResultContainsCompleteInformation()`
   - Combat result includes damage dealt to each fighter
   - Shows which strikes landed vs blocked

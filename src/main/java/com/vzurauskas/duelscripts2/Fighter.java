@@ -4,11 +4,13 @@ public class Fighter {
     private final String name;
     private int hitPoints;
     private BodyPart parryingBodyPart;
+    private Weapon weapon;
 
     public Fighter(String name, int hitPoints) {
         this.name = name;
         this.hitPoints = hitPoints;
         this.parryingBodyPart = BodyPart.TORSO;
+        this.weapon = new Weapon("Fist", 0);
     }
 
     public int hitPoints() {
@@ -29,7 +31,13 @@ public class Fighter {
 
     public void strike(Fighter target, BodyPart bodyPart) {
         if (target.parryingBodyPart != bodyPart) {
-            target.hitPoints -= bodyPart.damage();
+            int baseDamage = bodyPart.damage();
+            int weaponDamage = weapon.damage();
+            target.hitPoints -= (baseDamage + weaponDamage);
         }
+    }
+
+    public void equipWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 }

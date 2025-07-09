@@ -96,4 +96,22 @@ class CombatTest {
         
         assertFalse(alice.isAlive());
     }
+
+    @Test
+    void weaponAffectsDamageCalculation() {
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        Fighter charlie = new Fighter("Charlie", 100);
+        
+        // Alice has no weapon (base damage)
+        alice.strike(bob, BodyPart.HEAD);
+        int baseDamage = 100 - bob.hitPoints();
+        
+        // Charlie has a stronger weapon
+        charlie.equipWeapon(new Weapon("Sword", 5));
+        charlie.strike(alice, BodyPart.HEAD);
+        int weaponDamage = 100 - alice.hitPoints();
+        
+        assertTrue(weaponDamage > baseDamage);
+    }
 }

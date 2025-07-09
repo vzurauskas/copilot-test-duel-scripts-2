@@ -79,6 +79,9 @@ Always write one test at a time, make it run, then improve structure. Always run
 
 # CODE STYLE
 
+## General
+- Do not use nulls. Always initialize a fields to non-null values.
+
 ## Naming
 
 ### Method names
