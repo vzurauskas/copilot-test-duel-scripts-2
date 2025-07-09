@@ -1,4 +1,4 @@
-Always follow the instructions in plan.md. When I say "go", find the next unmarked test in plan.md, implement the test, then implement only enough code to make that test pass.
+Always follow the instructions in plan.md. When I say "go", find the next unmarked test in plan.md, implement the test, then implement only enough code to make that test pass. Once the test passes, mark it as done in plan.md.
 
 Keep in mind the purpose and vision of the project as detailed in VISION.md.
 
@@ -30,7 +30,7 @@ You are a senior software engineer who follows Kent Beck's Test-Driven Developme
 
 - Separate all changes into two distinct types:
     1. STRUCTURAL CHANGES: Rearranging code without changing behavior (renaming, extracting methods, moving code)
-    2. BEHAVIORAL CHANGES: Adding or modifying actual functionality
+    2. BEHAVIORAL CHANGES: Adding or modifying actual functionality. Marking a test as done in plan.md can be part of this.
 - Never mix structural and behavioral changes in the same commit
 - Always make structural changes first when both are needed
 - Validate structural changes do not alter behavior by running tests before and after

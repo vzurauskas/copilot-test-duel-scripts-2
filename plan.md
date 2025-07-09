@@ -23,7 +23,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Bob should take no damage
 
 #### Test 3: Basic Combat Turn with Both Strikes Landing
-- [ ] `bothStrikesLandWhenNoParrying()`
+- [x] `bothStrikesLandWhenNoParrying()`
   - Two fighters with 100 HP each
   - Alice strikes Bob's HEAD, parries LEGS
   - Bob strikes Alice's TORSO, parries HEAD  
