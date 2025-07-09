@@ -15,14 +15,6 @@ public class Weapon {
         this.criticalHitChance = criticalHitChance;
     }
 
-    public int damage() {
-        return damage;
-    }
-
-    public double criticalHitChance() {
-        return criticalHitChance;
-    }
-
     public int damageFor(BodyPart bodyPart) {
         int baseDamage = (int)(damage * bodyPart.multiplier());
         if (Math.random() < criticalHitChance) {
