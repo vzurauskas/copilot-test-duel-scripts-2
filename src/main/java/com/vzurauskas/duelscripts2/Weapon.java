@@ -22,4 +22,12 @@ public class Weapon {
     public double criticalHitChance() {
         return criticalHitChance;
     }
+
+    public int damageFor(BodyPart bodyPart) {
+        int baseDamage = (int)(damage * bodyPart.multiplier());
+        if (Math.random() < criticalHitChance) {
+            baseDamage *= 2;
+        }
+        return baseDamage;
+    }
 }
