@@ -16,7 +16,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Bob should take damage and have reduced HP
 
 #### Test 2: Basic Parry Blocks Strike
-- [ ] `parryBlocksStrike()`
+- [x] `parryBlocksStrike()`
   - Two fighters with 100 HP each
   - Bob parries HEAD
   - Alice strikes Bob's HEAD

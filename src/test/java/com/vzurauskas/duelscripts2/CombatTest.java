@@ -14,4 +14,15 @@ class CombatTest {
         
         assertTrue(bob.getHitPoints() < 100);
     }
+
+    @Test
+    void parryBlocksStrike() {
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        bob.parry(BodyPart.HEAD);
+        alice.strike(bob, BodyPart.HEAD);
+        
+        assertEquals(100, bob.getHitPoints());
+    }
 }
