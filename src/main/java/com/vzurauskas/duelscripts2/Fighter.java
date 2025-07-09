@@ -11,7 +11,7 @@ public class Fighter {
         this.parryingBodyPart = BodyPart.TORSO;
     }
 
-    public int getHitPoints() {
+    public int hitPoints() {
         return hitPoints;
     }
 
@@ -21,7 +21,7 @@ public class Fighter {
 
     public void strike(Fighter target, BodyPart bodyPart) {
         if (target.parryingBodyPart != bodyPart) {
-            target.hitPoints -= bodyPart.getDamage();
+            target.hitPoints -= bodyPart.damage();
         }
     }
 }

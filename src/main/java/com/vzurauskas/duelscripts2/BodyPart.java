@@ -9,7 +9,7 @@ public enum BodyPart {
         this.damage = damage;
     }
     
-    public int getDamage() {
+    public int damage() {
         return damage;
     }
 }

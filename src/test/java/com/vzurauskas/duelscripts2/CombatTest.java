@@ -12,7 +12,7 @@ class CombatTest {
         
         alice.strike(bob, BodyPart.HEAD);
         
-        assertTrue(bob.getHitPoints() < 100);
+        assertTrue(bob.hitPoints() < 100);
     }
 
     @Test
@@ -23,7 +23,7 @@ class CombatTest {
         bob.parry(BodyPart.HEAD);
         alice.strike(bob, BodyPart.HEAD);
         
-        assertEquals(100, bob.getHitPoints());
+        assertEquals(100, bob.hitPoints());
     }
 
     @Test
@@ -36,8 +36,8 @@ class CombatTest {
         bob.parry(BodyPart.HEAD);
         alice.strike(bob, BodyPart.TORSO);
         
-        assertTrue(alice.getHitPoints() < 100);
-        assertTrue(bob.getHitPoints() < 100);
+        assertTrue(alice.hitPoints() < 100);
+        assertTrue(bob.hitPoints() < 100);
     }
 
     @Test
@@ -50,8 +50,8 @@ class CombatTest {
         bob.parry(BodyPart.TORSO);
         alice.strike(bob, BodyPart.TORSO);
         
-        assertEquals(100, alice.getHitPoints());
-        assertEquals(100, bob.getHitPoints());
+        assertEquals(100, alice.hitPoints());
+        assertEquals(100, bob.hitPoints());
     }
 
     @Test
@@ -68,9 +68,9 @@ class CombatTest {
         dave.parry(BodyPart.HEAD);
         alice.strike(dave, BodyPart.LEGS);
 
-        int headDamage = 100 - bob.getHitPoints();
-        int torsoDamage = 100 - charlie.getHitPoints();
-        int legsDamage = 100 - dave.getHitPoints();
+        int headDamage = 100 - bob.hitPoints();
+        int torsoDamage = 100 - charlie.hitPoints();
+        int legsDamage = 100 - dave.hitPoints();
         
         assertTrue(headDamage > torsoDamage);
         assertTrue(torsoDamage > legsDamage);
