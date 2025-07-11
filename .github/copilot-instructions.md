@@ -59,6 +59,8 @@ Repeat the cycle for new functionality.
     4. Commit messages clearly state whether the commit contains structural or behavioral changes
 - Use small, frequent commits rather than large, infrequent ones
 - Write a clear commit title and a **concise** extended description.
+    - State the purpose of the change.
+    - Don't just list what was changed, as that can be seen in the diff.
 
 # CODE QUALITY STANDARDS
 
