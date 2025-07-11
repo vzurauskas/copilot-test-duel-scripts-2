@@ -4,9 +4,11 @@ public class Strike {
     private final BodyPart target;
     private final int damage;
     private final boolean criticalHit;
-    private final boolean parried;
+    private final BodyPart parried;
 
-    public Strike(BodyPart target, int damage, boolean criticalHit, boolean parried) {
+    public Strike(
+        BodyPart target, int damage, boolean criticalHit, BodyPart parried
+    ) {
         this.target = target;
         this.damage = damage;
         this.criticalHit = criticalHit;
@@ -26,6 +28,6 @@ public class Strike {
     }
 
     public boolean wasParried() {
-        return parried;
+        return parried == target;
     }
 }

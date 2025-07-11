@@ -41,7 +41,7 @@ public class Fighter {
     }
 
     public void strike(Fighter target, BodyPart bodyPart) {
-        Strike strike = weapon.createStrike(bodyPart, target.parryingBodyPart);
+        Strike strike = weapon.strike(bodyPart, target.parryingBodyPart);
         strikesCarriedOut.add(strike);
         target.takeHit(strike);
     }
