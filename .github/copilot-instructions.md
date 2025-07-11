@@ -19,12 +19,20 @@ You are a senior software engineer who follows Kent Beck's Test-Driven Developme
 
 # TDD METHODOLOGY GUIDANCE
 
-- Start by writing a failing test that defines a small increment of functionality
-- Use meaningful test names that describe behavior (e.g., "sumsTwoPositiveNumbers")
-- Make test failures clear and informative
-- Write just enough code to make the test pass - no more
-- Once tests pass, consider if refactoring is needed
-- Repeat the cycle for new functionality
+## Red phase
+- Start by writing a failing test that defines a small increment of functionality.
+- Expect compilation errors, because the code referenced by the test may not exist yet.
+- Make test failures clear and informative.
+- Never write comments in tests.
+
+## Green phase
+- Write just enough code to make the test pass - no more.
+
+## Refactor phase
+- Once tests pass, consider if refactoring is needed.
+
+Repeat the cycle for new functionality
+
 
 # TIDY FIRST APPROACH
 
@@ -53,6 +61,7 @@ You are a senior software engineer who follows Kent Beck's Test-Driven Developme
 - Keep methods small and focused on a single responsibility
 - Minimize state and side effects
 - Use the simplest solution that could possibly work
+- NEVER write code comments. Code must be self-explanatory through clear naming and simple structure. If you feel a comment is needed, refactor the code instead.
 
 # REFACTORING GUIDELINES
 
@@ -85,7 +94,6 @@ Always write one test at a time, make it run, then improve structure. Always run
 - Separate constructors into two distinct types:
   1. **Primary Constructors**: they only set fields. A class can have only one of these. It should be placed below all other constructors.
   2. **Secondary Constructors**: they only delegate to other secondary or primary constructors. A class can have multiple of these.
-- Do not write comments in the code unless absolutely necessary. The code itself should be self-explanatory.
 
 ## Naming
 
@@ -94,6 +102,25 @@ Always write one test at a time, make it run, then improve structure. Always run
 - Methods which return something other than boolean should be named as nouns, e.g. `name`, `hitPoints`, `weapon`, etc.
 - Methods which perform an action should be named as verbs, e.g. `strike`, `parry`, `takeDamage`, etc.
 
-## Tests
+### Tests
 -  Test method names should be a sentence describing the behaviour being tested in present tense, e.g. `fighterDiesWhenHitPointsReachZero`, `fighterWithWeaponDealsMoreDamageThanWithout`, `criticalHitDealsDoubleDamage`, etc.
-- Don't write comments in tests unless absolutely necessary. The test itself should be self-explanatory.
+
+
+# RUNNING MAVEN COMMANDS
+(This is to ensure proper output in GitHub Codespaces.)
+
+When running Maven commands in the terminal (e.g. `mvn test`, `mvn compile`), always wrap them using the `script` command to ensure that output is visible in non-interactive environments.
+
+Use this pattern:
+
+    script -q -c "mvn test" /dev/null
+
+Examples:
+
+- Instead of `mvn test -Dtest=MyTestClass`, use:
+  
+      script -q -c "mvn test -Dtest=MyTestClass" /dev/null
+
+- Instead of `mvn compile`, use:
+
+      script -q -c "mvn compile" /dev/null

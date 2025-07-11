@@ -144,4 +144,27 @@ class CombatTest {
         int expectedCriticalDamage = (int)((10 * 1.7) * 2);
         assertEquals(expectedCriticalDamage, actualDamage);
     }
+
+    @Test
+    void complexCombatScenarioWorksCorrectly() {
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        alice.equipWeapon(new Weapon("Sword", 8));
+        bob.equipWeapon(new Weapon("Axe", 6, 1.0));
+        
+        alice.parry(BodyPart.LEGS);
+        bob.strike(alice, BodyPart.HEAD);
+        bob.parry(BodyPart.HEAD);
+        alice.strike(bob, BodyPart.TORSO);
+        
+        int bobExpectedHP = 100 - 8;
+        assertEquals(bobExpectedHP, bob.hitPoints());
+        
+        int aliceExpectedHP = 100 - 20;
+        assertEquals(aliceExpectedHP, alice.hitPoints());
+        
+        assertTrue(alice.isAlive());
+        assertTrue(bob.isAlive());
+    }
 }

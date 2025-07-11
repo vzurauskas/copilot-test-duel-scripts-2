@@ -75,7 +75,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 **Objective**: Full turn resolution with all mechanics
 
 #### Test 11: Complex Combat Scenario
-- [ ] `complexCombatScenarioWorksCorrectly()`
+- [x] `complexCombatScenarioWorksCorrectly()`
   - Multiple mechanics working together
   - Weapon damage + body part multipliers + critical hits
   - Proper damage calculation and HP updates
