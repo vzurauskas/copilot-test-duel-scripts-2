@@ -35,9 +35,15 @@ public class Fighter {
     }
 
     public void strike(Fighter target, BodyPart bodyPart) {
-        strikesCarriedOut.add(new Strike(bodyPart));
-        if (target.parryingBodyPart != bodyPart) {
-            target.hitPoints -= weapon.damageFor(bodyPart);
+        boolean wasParried = target.parryingBodyPart == bodyPart;
+        int damage = wasParried ? 0 : weapon.damageFor(bodyPart);
+        boolean wasCriticalHit = false;
+        
+        strikesCarriedOut.add(
+            new Strike(bodyPart, damage, wasCriticalHit, wasParried)
+        );
+        if (!wasParried) {
+            target.hitPoints -= damage;
         }
     }
 

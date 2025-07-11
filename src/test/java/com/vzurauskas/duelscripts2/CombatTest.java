@@ -219,11 +219,20 @@ class CombatTest {
         alice.strike(bob, BodyPart.HEAD);
         
         assertEquals(1, alice.strikesCarriedOut().size());
-        assertEquals(BodyPart.HEAD, alice.strikesCarriedOut().get(0).target());
+        Strike firstStrike = alice.strikesCarriedOut().get(0);
+        assertEquals(BodyPart.HEAD, firstStrike.target());
+        assertEquals(5, firstStrike.damage());
+        assertFalse(firstStrike.wasCriticalHit());
+        assertFalse(firstStrike.wasParried());
         
+        bob.parry(BodyPart.TORSO);
         alice.strike(bob, BodyPart.TORSO);
         
         assertEquals(2, alice.strikesCarriedOut().size());
-        assertEquals(BodyPart.TORSO, alice.strikesCarriedOut().get(1).target());
+        Strike secondStrike = alice.strikesCarriedOut().get(1);
+        assertEquals(BodyPart.TORSO, secondStrike.target());
+        assertEquals(0, secondStrike.damage());
+        assertFalse(secondStrike.wasCriticalHit());
+        assertTrue(secondStrike.wasParried());
     }
 }

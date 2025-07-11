@@ -27,7 +27,7 @@ You are a senior software engineer who follows Kent Beck's Test-Driven Developme
 
 ## Green phase
 - Write just enough code to make the test pass - no more.
-- When all tests pass, commit the changes.
+- When all tests pass, commit the changes before moving on to the Refactor phase.
 
 ## Refactor phase
 - Always explicitly consider refactoring after tests pass.
