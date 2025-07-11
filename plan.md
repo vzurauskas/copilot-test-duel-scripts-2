@@ -86,7 +86,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Result contains basic outcome information
 
 #### Test 13: Combat Result Damage Information
-- [ ] `combatResultContainsDamageDealt()`
+- [x] `combatResultContainsDamageDealt()`
   - Result includes damage dealt to each fighter
 
 #### Test 14: Combat Result Strike Information

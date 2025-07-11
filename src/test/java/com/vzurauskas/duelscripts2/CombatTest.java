@@ -178,4 +178,16 @@ class CombatTest {
         
         assertNotNull(result.description());
     }
+    
+    @Test
+    void combatResultContainsDamageDealt() {
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        Combat combat = new Combat(alice, bob);
+        CombatResult result = combat.nextTurn();
+        
+        assertTrue(result.description().contains("Alice: 0 damage"));
+        assertTrue(result.description().contains("Bob: 0 damage"));
+    }
 }
