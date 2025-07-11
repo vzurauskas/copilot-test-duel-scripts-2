@@ -90,7 +90,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Result includes damage dealt to each fighter
 
 #### Test 14: Combat Result Strike Information
-- [ ] `combatResultContainsStrikeOutcomes()`
+- [x] `combatResultContainsStrikeOutcomes()`
   - Result shows which strikes landed vs blocked
 
 #### Test 15: Combat Result Critical Hit Information

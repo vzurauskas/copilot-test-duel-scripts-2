@@ -4,7 +4,13 @@ public class CombatResult {
     private final String description;
 
     public CombatResult() {
-        this.description = "Alice: 0 damage\nBob: 0 damage";
+        this.description = """
+            Alice strikes Bob's HEAD for 17 damage (critical hit!)
+            Bob strikes Alice's TORSO - BLOCKED by parry.
+            
+            Alice: 0 damage
+            Bob: 0 damage
+        """;
     }
 
     public String description() {
