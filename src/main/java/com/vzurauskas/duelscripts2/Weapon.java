@@ -15,6 +15,10 @@ public class Weapon {
         this.criticalHitChance = criticalHitChance;
     }
     
+    public String name() {
+        return name;
+    }
+
     public Strike strike(BodyPart target, BodyPart parried) {
         if (parried == target) {
             return new Strike(target, 0, false, parried);

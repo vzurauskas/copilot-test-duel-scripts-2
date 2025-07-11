@@ -10,14 +10,20 @@ public class Fighter {
     private Weapon weapon;
     private final List<Strike> strikesCarriedOut;
     private final List<Strike> strikesSuffered;
+    private Script script;
 
     public Fighter(String name, int hitPoints) {
+        this(name, hitPoints, new DefaultScript());
+    }
+
+    public Fighter(String name, int hitPoints, Script script) {
         this.name = name;
         this.hitPoints = hitPoints;
         this.parryingBodyPart = BodyPart.TORSO;
         this.weapon = new Weapon("Fist", 3);
         this.strikesCarriedOut = new ArrayList<>();
         this.strikesSuffered = new ArrayList<>();
+        this.script = script;
     }
 
     public void equipWeapon(Weapon weapon) {
@@ -59,5 +65,13 @@ public class Fighter {
 
     public List<Strike> strikesSuffered() {
         return strikesSuffered;
+    }
+
+    public Script getScript() {
+        return script;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
     }
 }

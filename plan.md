@@ -105,7 +105,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Result shows which strikes landed vs blocked
 
 #### Test 17: Combat Result Strike Information with different fighters
-- [ ] `combatResultForDifferentFightersContainsStrikeOutcomes()`
+- [x] `combatResultForDifferentFightersContainsStrikeOutcomes()`
   - Different fighters than in previous test.
   - Result shows which strikes landed vs blocked.
 

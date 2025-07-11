@@ -181,8 +181,33 @@ class CombatTest {
     
     @Test
     void combatResultContainsDamageDealt() {
-        Fighter alice = new Fighter("Alice", 100);
-        Fighter bob = new Fighter("Bob", 100);
+        Fighter alice = new Fighter("Alice", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+        });
+        
+        Fighter bob = new Fighter("Bob", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD; // Block Alice's HEAD strike
+            }
+        });
+        
+        // Set up weapons - doesn't matter much since both strikes will be blocked
+        alice.equipWeapon(new Weapon("Sword", 20, 1.0)); 
+        bob.equipWeapon(new Weapon("Axe", 10)); 
         
         Combat combat = new Combat(alice, bob);
         CombatResult result = combat.nextTurn();
@@ -193,21 +218,68 @@ class CombatTest {
     
     @Test
     void combatResultContainsStrikeOutcomes() {
-        Fighter alice = new Fighter("Alice", 100);
-        Fighter bob = new Fighter("Bob", 100);
+        Fighter alice = new Fighter("Alice", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+        });
+        
+        Fighter bob = new Fighter("Bob", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.LEGS; // Don't parry HEAD so Alice's strike lands
+            }
+        });
+        
+        alice.equipWeapon(new Weapon("Sword", 10, 1.0));
+        bob.equipWeapon(new Weapon("Axe", 10));
         
         Combat combat = new Combat(alice, bob);
         CombatResult result = combat.nextTurn();
         
+        String description = result.description();
+        
         assertTrue(
-            result.description().contains(
-                "Alice strikes Bob's HEAD with Sword for 34 damage (critical hit!)"
-            )
+            description.contains("Alice strikes Bob's HEAD with Sword for 34 damage (critical hit!)"),
+            "Expected Alice's strike description. Actual: " + description
         );
         assertTrue(
-            result.description().contains(
-                "Bob strikes Alice's TORSO with Axe - BLOCKED by parry."
-            )
+            description.contains("Bob strikes Alice's TORSO with Axe for 0 damage - BLOCKED by parry."),
+            "Expected Bob's blocked strike description. Actual: " + description
+        );
+    }
+    
+    @Test
+    void combatResultForDifferentFightersContainsStrikeOutcomes() {
+        Fighter charlie = new Fighter("Charlie", 100, new CharlieScript());
+        Fighter diana = new Fighter("Diana", 100, new DianaScript());
+        
+        charlie.equipWeapon(new Weapon("Mace", 15));
+        diana.equipWeapon(new Weapon("Dagger", 8, 1.0));
+        
+        Combat combat = new Combat(charlie, diana);
+        CombatResult result = combat.nextTurn();
+        
+        String description = result.description();
+        
+        assertTrue(
+            description.contains("Charlie strikes Diana's TORSO with Mace for 0 damage - BLOCKED by parry."),
+            "Expected description to contain Charlie's blocked strike. Actual: " + description
+        );
+        assertTrue(
+            description.contains("Diana strikes Charlie's LEGS with Dagger for 8 damage (critical hit!)"),
+            "Expected description to contain Diana's critical strike. Actual: " + description
         );
     }
     
