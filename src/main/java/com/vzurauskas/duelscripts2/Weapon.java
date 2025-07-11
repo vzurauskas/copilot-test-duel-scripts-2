@@ -14,15 +14,15 @@ public class Weapon {
         this.damage = damage;
         this.criticalHitChance = criticalHitChance;
     }
-
-    public int damageFor(BodyPart bodyPart) {
-        return strikeFor(bodyPart).damage();
-    }
     
-    public WeaponStrike strikeFor(BodyPart bodyPart) {
-        int baseDamage = (int)(damage * bodyPart.multiplier());
-        boolean isCritical = Math.random() < criticalHitChance;
-        int finalDamage = isCritical ? baseDamage * 2 : baseDamage;
-        return new WeaponStrike(finalDamage, isCritical);
+    public Strike createStrike(BodyPart target, BodyPart parried) {
+        if (parried == target) {
+            return new Strike(target, 0, false, true);
+        } else {
+            int baseDamage = (int)(damage * target.multiplier());
+            boolean isCritical = Math.random() < criticalHitChance;
+            int finalDamage = isCritical ? baseDamage * 2 : baseDamage;
+            return new Strike(target, finalDamage, isCritical, false);
+        }
     }
 }

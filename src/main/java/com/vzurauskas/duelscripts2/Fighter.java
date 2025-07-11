@@ -20,6 +20,10 @@ public class Fighter {
         this.strikesSuffered = new ArrayList<>();
     }
 
+    public void equipWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
     public int hitPoints() {
         return hitPoints;
     }
@@ -37,20 +41,15 @@ public class Fighter {
     }
 
     public void strike(Fighter target, BodyPart bodyPart) {
-        boolean wasParried = target.parryingBodyPart == bodyPart;
-        if (wasParried) {
-            Strike strike = new Strike(bodyPart, 0, false, true);
-            strikesCarriedOut.add(strike);
-            target.strikesSuffered.add(strike);
-        } else {
-            WeaponStrike weaponStrike = weapon.strikeFor(bodyPart);
-            Strike strike = new Strike(
-                bodyPart, weaponStrike.damage(), weaponStrike.isCritical(), false
-            );
-            strikesCarriedOut.add(strike);
-            target.strikesSuffered.add(strike);
-            
-            target.hitPoints -= weaponStrike.damage();
+        Strike strike = weapon.createStrike(bodyPart, target.parryingBodyPart);
+        strikesCarriedOut.add(strike);
+        target.takeHit(strike);
+    }
+
+    public void takeHit(Strike strike) {
+        strikesSuffered.add(strike);
+        if (!strike.wasParried()) {
+            hitPoints -= strike.damage();
         }
     }
 
@@ -60,9 +59,5 @@ public class Fighter {
 
     public List<Strike> strikesSuffered() {
         return strikesSuffered;
-    }
-
-    public void equipWeapon(Weapon weapon) {
-        this.weapon = weapon;
     }
 }
