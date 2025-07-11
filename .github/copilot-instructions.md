@@ -27,11 +27,18 @@ You are a senior software engineer who follows Kent Beck's Test-Driven Developme
 
 ## Green phase
 - Write just enough code to make the test pass - no more.
+- When all tests pass, commit the changes.
 
 ## Refactor phase
-- Once tests pass, consider if refactoring is needed.
+- Always explicitly consider refactoring after tests pass.
+- Run tests before and after any refactoring to ensure behavior is unchanged.
+- Look for: duplication, unclear naming, large methods, feature envy, data clumps, too many files in one package.
+- If no refactoring is needed, explicitly state "No refactoring needed" and why.
+- Make one refactoring change at a time.
+- When a refactoring is done and all tests pass, commit the changes.
+- When refactoring, see the Refactoring Guidelines section below.
 
-Repeat the cycle for new functionality
+Repeat the cycle for new functionality.
 
 
 # TIDY FIRST APPROACH
@@ -51,7 +58,7 @@ Repeat the cycle for new functionality
     3. The change represents a single logical unit of work
     4. Commit messages clearly state whether the commit contains structural or behavioral changes
 - Use small, frequent commits rather than large, infrequent ones
-- Write concise commit messages.
+- Write a clear commit title and a **concise** extended description.
 
 # CODE QUALITY STANDARDS
 
@@ -77,11 +84,17 @@ When approaching a new feature:
 1. Write a simple failing test for a small part of the feature
 2. Implement the bare minimum to make it pass
 3. Run tests to confirm they pass (Green)
-4. Commit the change as a behavioral change.
-5. Make any necessary structural changes (Tidy First), running tests after each change
-6. Commit structural changes separately
-7. Add another test for the next small increment of functionality
-8. Repeat until the feature is complete, committing behavioral changes separately from structural ones
+4. **REFACTOR PHASE**: Explicitly examine code for improvements:
+   - Check for duplication, unclear naming, large methods
+   - If refactoring is needed, make structural changes and run tests after each
+   - If no refactoring needed, state this explicitly with reasoning
+5. Commit the change as a behavioral change
+6. Make any additional structural changes (Tidy First), running tests after each change
+7. Commit structural changes separately
+8. Add another test for the next small increment of functionality
+9. Repeat until the feature is complete
+
+**Remember: Red → Green → Refactor is a complete cycle. Never skip Refactor consideration.**
 
 Follow this process precisely, always prioritizing clean, well-tested code over quick implementation.
 
@@ -106,9 +119,13 @@ Always write one test at a time, make it run, then improve structure. Always run
 -  Test method names should be a sentence describing the behaviour being tested in present tense, e.g. `fighterDiesWhenHitPointsReachZero`, `fighterWithWeaponDealsMoreDamageThanWithout`, `criticalHitDealsDoubleDamage`, etc.
 
 
-# RUNNING MAVEN COMMANDS
+# RUNNING TERMINAL COMMANDS
 (This is to ensure proper output in GitHub Codespaces.)
 
+## Any terminal command
+- When you run a command in terminal and don't see any output, warn me. I need to know this because it's a problem that we need to fix.
+
+## Maven commands
 When running Maven commands in the terminal (e.g. `mvn test`, `mvn compile`), always wrap them using the `script` command to ensure that output is visible in non-interactive environments.
 
 Use this pattern:
