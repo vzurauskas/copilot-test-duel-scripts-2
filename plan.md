@@ -80,11 +80,22 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - Weapon damage + body part multipliers + critical hits
   - Proper damage calculation and HP updates
 
-#### Test 12: Combat Result Information
-- [ ] `combatResultContainsCompleteInformation()`
-  - Combat result includes damage dealt to each fighter
-  - Shows which strikes landed vs blocked
-  - Indicates critical hits
+#### Test 12: Basic Combat Result
+- [x] `combatReturnsResult()`
+  - Combat method returns a CombatResult object
+  - Result contains basic outcome information
+
+#### Test 13: Combat Result Damage Information
+- [ ] `combatResultContainsDamageDealt()`
+  - Result includes damage dealt to each fighter
+
+#### Test 14: Combat Result Strike Information
+- [ ] `combatResultContainsStrikeOutcomes()`
+  - Result shows which strikes landed vs blocked
+
+#### Test 15: Combat Result Critical Hit Information
+- [ ] `combatResultIndicatesCriticalHits()`
+  - Result indicates when critical hits occurred
 
 ## Success Criteria
 - All tests pass

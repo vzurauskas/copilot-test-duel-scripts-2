@@ -167,4 +167,15 @@ class CombatTest {
         assertTrue(alice.isAlive());
         assertTrue(bob.isAlive());
     }
+    
+    @Test
+    void combatReturnsResult() {
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        Combat combat = new Combat(alice, bob);
+        CombatResult result = combat.nextTurn();
+        
+        assertNotNull(result.description());
+    }
 }
