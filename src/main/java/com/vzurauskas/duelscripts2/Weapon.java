@@ -16,10 +16,13 @@ public class Weapon {
     }
 
     public int damageFor(BodyPart bodyPart) {
+        return strikeFor(bodyPart).damage();
+    }
+    
+    public WeaponStrike strikeFor(BodyPart bodyPart) {
         int baseDamage = (int)(damage * bodyPart.multiplier());
-        if (Math.random() < criticalHitChance) {
-            baseDamage *= 2;
-        }
-        return baseDamage;
+        boolean isCritical = Math.random() < criticalHitChance;
+        int finalDamage = isCritical ? baseDamage * 2 : baseDamage;
+        return new WeaponStrike(finalDamage, isCritical);
     }
 }

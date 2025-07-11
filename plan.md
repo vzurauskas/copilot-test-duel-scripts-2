@@ -95,7 +95,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
   - After Alice strikes Bob a second time, she remembers both strikes.
 
 #### Test 15: Fighter keeps history of strikes suffered.
-- [ ] `fighterKeepsHistoryOfStrikesSuffered()`
+- [x] `fighterKeepsHistoryOfStrikesSuffered()`
   - After Alice strikes Bob, Bob remembers the strike.
   - After Alice strikes Bob a second time, Bob remembers both strikes.
   - One of the strikes is critical hit.

@@ -235,4 +235,31 @@ class CombatTest {
         assertFalse(secondStrike.wasCriticalHit());
         assertTrue(secondStrike.wasParried());
     }
+    
+    @Test
+    void fighterKeepsHistoryOfStrikesSuffered() {
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        alice.equipWeapon(new Weapon("Critical Sword", 4, 1.0));
+        alice.strike(bob, BodyPart.HEAD);
+        
+        assertEquals(1, bob.strikesSuffered().size());
+        Strike firstStrike = bob.strikesSuffered().get(0);
+        assertEquals(BodyPart.HEAD, firstStrike.target());
+        assertEquals(12, firstStrike.damage());
+        assertTrue(firstStrike.wasCriticalHit());
+        assertFalse(firstStrike.wasParried());
+        
+        alice.equipWeapon(new Weapon("Normal Sword", 3));
+        bob.parry(BodyPart.HEAD);
+        alice.strike(bob, BodyPart.TORSO);
+        
+        assertEquals(2, bob.strikesSuffered().size());
+        Strike secondStrike = bob.strikesSuffered().get(1);
+        assertEquals(BodyPart.TORSO, secondStrike.target());
+        assertEquals(3, secondStrike.damage());
+        assertFalse(secondStrike.wasCriticalHit());
+        assertFalse(secondStrike.wasParried());
+    }
 }

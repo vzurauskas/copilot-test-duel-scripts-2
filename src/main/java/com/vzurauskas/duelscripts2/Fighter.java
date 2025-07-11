@@ -9,6 +9,7 @@ public class Fighter {
     private BodyPart parryingBodyPart;
     private Weapon weapon;
     private final List<Strike> strikesCarriedOut;
+    private final List<Strike> strikesSuffered;
 
     public Fighter(String name, int hitPoints) {
         this.name = name;
@@ -16,6 +17,7 @@ public class Fighter {
         this.parryingBodyPart = BodyPart.TORSO;
         this.weapon = new Weapon("Fist", 3);
         this.strikesCarriedOut = new ArrayList<>();
+        this.strikesSuffered = new ArrayList<>();
     }
 
     public int hitPoints() {
@@ -36,19 +38,28 @@ public class Fighter {
 
     public void strike(Fighter target, BodyPart bodyPart) {
         boolean wasParried = target.parryingBodyPart == bodyPart;
-        int damage = wasParried ? 0 : weapon.damageFor(bodyPart);
-        boolean wasCriticalHit = false;
-        
-        strikesCarriedOut.add(
-            new Strike(bodyPart, damage, wasCriticalHit, wasParried)
-        );
-        if (!wasParried) {
-            target.hitPoints -= damage;
+        if (wasParried) {
+            Strike strike = new Strike(bodyPart, 0, false, true);
+            strikesCarriedOut.add(strike);
+            target.strikesSuffered.add(strike);
+        } else {
+            WeaponStrike weaponStrike = weapon.strikeFor(bodyPart);
+            Strike strike = new Strike(
+                bodyPart, weaponStrike.damage(), weaponStrike.isCritical(), false
+            );
+            strikesCarriedOut.add(strike);
+            target.strikesSuffered.add(strike);
+            
+            target.hitPoints -= weaponStrike.damage();
         }
     }
 
     public List<Strike> strikesCarriedOut() {
         return strikesCarriedOut;
+    }
+
+    public List<Strike> strikesSuffered() {
+        return strikesSuffered;
     }
 
     public void equipWeapon(Weapon weapon) {
