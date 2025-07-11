@@ -201,7 +201,7 @@ class CombatTest {
         
         assertTrue(
             result.description().contains(
-                "Alice strikes Bob's HEAD for 17 damage (critical hit!)"
+                "Alice strikes Bob's HEAD for 34 damage (critical hit!)"
             )
         );
         assertTrue(
@@ -209,5 +209,21 @@ class CombatTest {
                 "Bob strikes Alice's TORSO - BLOCKED by parry."
             )
         );
+    }
+    
+    @Test
+    void fighterKeepsHistoryOfStrikesCarriedOut() {
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        alice.strike(bob, BodyPart.HEAD);
+        
+        assertEquals(1, alice.strikesCarriedOut().size());
+        assertEquals(BodyPart.HEAD, alice.strikesCarriedOut().get(0).target());
+        
+        alice.strike(bob, BodyPart.TORSO);
+        
+        assertEquals(2, alice.strikesCarriedOut().size());
+        assertEquals(BodyPart.TORSO, alice.strikesCarriedOut().get(1).target());
     }
 }

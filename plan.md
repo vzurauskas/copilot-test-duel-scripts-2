@@ -89,13 +89,24 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 - [x] `combatResultContainsDamageDealt()`
   - Result includes damage dealt to each fighter
 
-#### Test 14: Combat Result Strike Information
+#### Test 14: Fighter keeps history of strikes carried out.
+- [x] `fighterKeepsHistoryOfStrikesCarriedOut()`
+  - After Alice strikes Bob, Alice remembers the strike.
+  - After Alice strikes Bob a second time, she remembers both strikes.
+
+#### Test 15: Fighter keeps history of strikes suffered.
+- [ ] `fighterKeepsHistoryOfStrikesSuffered()`
+  - After Alice strikes Bob, Bob remembers the strike.
+  - After Alice strikes Bob a second time, Bob remembers both strikes.
+
+#### Test 16: Combat Result Strike Information
 - [x] `combatResultContainsStrikeOutcomes()`
   - Result shows which strikes landed vs blocked
 
-#### Test 15: Combat Result Critical Hit Information
-- [ ] `combatResultIndicatesCriticalHits()`
-  - Result indicates when critical hits occurred
+#### Test 17: Combat Result Strike Information with different fighters
+- [ ] `combatResultForDifferentFightersContainsStrikeOutcomes()`
+  - Different fighters than in previous test.
+  - Result shows which strikes landed vs blocked.
 
 ## Success Criteria
 - All tests pass

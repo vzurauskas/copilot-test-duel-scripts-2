@@ -1,16 +1,21 @@
 package com.vzurauskas.duelscripts2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Fighter {
     private final String name;
     private int hitPoints;
     private BodyPart parryingBodyPart;
     private Weapon weapon;
+    private final List<Strike> strikesCarriedOut;
 
     public Fighter(String name, int hitPoints) {
         this.name = name;
         this.hitPoints = hitPoints;
         this.parryingBodyPart = BodyPart.TORSO;
         this.weapon = new Weapon("Fist", 3);
+        this.strikesCarriedOut = new ArrayList<>();
     }
 
     public int hitPoints() {
@@ -30,9 +35,14 @@ public class Fighter {
     }
 
     public void strike(Fighter target, BodyPart bodyPart) {
+        strikesCarriedOut.add(new Strike(bodyPart));
         if (target.parryingBodyPart != bodyPart) {
             target.hitPoints -= weapon.damageFor(bodyPart);
         }
+    }
+
+    public List<Strike> strikesCarriedOut() {
+        return strikesCarriedOut;
     }
 
     public void equipWeapon(Weapon weapon) {
