@@ -201,12 +201,12 @@ class CombatTest {
         
         assertTrue(
             result.description().contains(
-                "Alice strikes Bob's HEAD for 34 damage (critical hit!)"
+                "Alice strikes Bob's HEAD with Sword for 34 damage (critical hit!)"
             )
         );
         assertTrue(
             result.description().contains(
-                "Bob strikes Alice's TORSO - BLOCKED by parry."
+                "Bob strikes Alice's TORSO with Axe - BLOCKED by parry."
             )
         );
     }

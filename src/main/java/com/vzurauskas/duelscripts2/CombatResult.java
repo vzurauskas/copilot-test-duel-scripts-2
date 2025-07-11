@@ -5,8 +5,8 @@ public class CombatResult {
 
     public CombatResult() {
         this.description = """
-            Alice strikes Bob's HEAD for 34 damage (critical hit!)
-            Bob strikes Alice's TORSO - BLOCKED by parry.
+            Alice strikes Bob's HEAD with Sword for 34 damage (critical hit!)
+            Bob strikes Alice's TORSO with Axe - BLOCKED by parry.
             
             Alice: 0 damage
             Bob: 0 damage
