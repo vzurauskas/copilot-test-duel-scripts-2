@@ -1,23 +1,16 @@
 package com.vzurauskas.duelscripts2;
 
 import org.junit.jupiter.api.Test;
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CombatTest {
 
     @Test
     void oneStrikesAnotherInHead() {
-        Fighter alice = new Fighter("Alice", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-        });
+        Fighter alice = new Fighter("Alice", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+        );
         Fighter bob = new Fighter("Bob", 100);
         
         alice.strike(bob);
@@ -126,17 +119,32 @@ class CombatTest {
 
     @Test
     void damageVariesByBodyPart() {
-        Fighter alice = new Fighter("Alice", 100);
-        Fighter bob = new Fighter("Bob", 100);
-        Fighter charlie = new Fighter("Charlie", 100);
-        Fighter dave = new Fighter("Dave", 100);
+        Fighter alice = new Fighter(
+            "Alice", 100,
+            new FixedScript(
+                List.of(BodyPart.HEAD, BodyPart.TORSO, BodyPart.LEGS), 
+                List.of(BodyPart.TORSO)
+            )
+        );
+        Fighter bob = new Fighter(
+            "Bob", 100, 
+            new FixedScript(BodyPart.TORSO, BodyPart.TORSO)
+        );
+        Fighter charlie = new Fighter(
+            "Charlie", 100, 
+            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+        );
+        Fighter dave = new Fighter(
+            "Dave", 100, 
+            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+        );
         
-        bob.parry(BodyPart.TORSO);
-        alice.strike(bob, BodyPart.HEAD);
-        charlie.parry(BodyPart.HEAD);
-        alice.strike(charlie, BodyPart.TORSO);
-        dave.parry(BodyPart.HEAD);
-        alice.strike(dave, BodyPart.LEGS);
+        bob.parry(alice);
+        alice.strike(bob);
+        charlie.parry(alice);
+        alice.strike(charlie);
+        dave.parry(alice);
+        alice.strike(dave);
 
         int headDamage = 100 - bob.hitPoints();
         int torsoDamage = 100 - charlie.hitPoints();
@@ -179,17 +187,23 @@ class CombatTest {
 
     @Test
     void weaponAffectsDamageCalculation() {
-        Fighter alice = new Fighter("Alice", 100);
+        Fighter alice = new Fighter(
+            "Alice", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+        );
         Fighter bob = new Fighter("Bob", 100);
-        Fighter charlie = new Fighter("Charlie", 100);
+        Fighter charlie = new Fighter(
+            "Charlie", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+        );
         
         // Alice has no weapon (base damage)
-        alice.strike(bob, BodyPart.HEAD);
+        alice.strike(bob);
         int baseDamage = 100 - bob.hitPoints();
         
         // Charlie has a stronger weapon
         charlie.equipWeapon(new Weapon("Sword", 5));
-        charlie.strike(alice, BodyPart.HEAD);
+        charlie.strike(alice);
         int weaponDamage = 100 - alice.hitPoints();
         
         assertTrue(weaponDamage > baseDamage);
@@ -197,12 +211,15 @@ class CombatTest {
 
     @Test
     void damageCalculationUsesMultiplicativeFormula() {
-        Fighter alice = new Fighter("Alice", 100);
+        Fighter alice = new Fighter(
+            "Alice", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+        );
         Fighter bob = new Fighter("Bob", 100);
         
         alice.equipWeapon(new Weapon("Sword", 12));
         
-        alice.strike(bob, BodyPart.HEAD);
+        alice.strike(bob);
         int expectedDamage = (int)(12 * 1.7); 
         int actualDamage = 100 - bob.hitPoints();
         
@@ -211,14 +228,17 @@ class CombatTest {
 
     @Test
     void criticalHitDealsDoubleDamage() {
-        Fighter alice = new Fighter("Alice", 100);
+        Fighter alice = new Fighter(
+            "Alice", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+        );
         Fighter bob = new Fighter("Bob", 100);
         
         // Weapon with 100% critical hit chance for testing
         Weapon criticalWeapon = new Weapon("Critical Sword", 10, 1.0);
         alice.equipWeapon(criticalWeapon);
         
-        alice.strike(bob, BodyPart.HEAD);
+        alice.strike(bob);
         int actualDamage = 100 - bob.hitPoints();
         
         int expectedCriticalDamage = (int)((10 * 1.7) * 2);
@@ -227,16 +247,22 @@ class CombatTest {
 
     @Test
     void complexCombatScenarioWorksCorrectly() {
-        Fighter alice = new Fighter("Alice", 100);
-        Fighter bob = new Fighter("Bob", 100);
+        Fighter alice = new Fighter(
+            "Alice", 100, 
+            new FixedScript(BodyPart.TORSO, BodyPart.LEGS)
+        );
+        Fighter bob = new Fighter(
+            "Bob", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.HEAD)
+        );
         
         alice.equipWeapon(new Weapon("Sword", 8));
         bob.equipWeapon(new Weapon("Axe", 6, 1.0));
         
-        alice.parry(BodyPart.LEGS);
-        bob.strike(alice, BodyPart.HEAD);
-        bob.parry(BodyPart.HEAD);
-        alice.strike(bob, BodyPart.TORSO);
+        alice.parry(bob);
+        bob.strike(alice);
+        bob.parry(alice);
+        alice.strike(bob);
         
         int bobExpectedHP = 100 - 8;
         assertEquals(bobExpectedHP, bob.hitPoints());
@@ -285,7 +311,8 @@ class CombatTest {
             }
         });
         
-        // Set up weapons - doesn't matter much since both strikes will be blocked
+        // Set up weapons - doesn't matter much since both 
+        // strikes will be blocked
         alice.equipWeapon(new Weapon("Sword", 20, 1.0)); 
         bob.equipWeapon(new Weapon("Axe", 10)); 
         
@@ -318,7 +345,7 @@ class CombatTest {
             
             @Override
             public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.LEGS; // Don't parry HEAD so Alice's strike lands
+                return BodyPart.LEGS; 
             }
         });
         
@@ -331,11 +358,15 @@ class CombatTest {
         String description = result.description();
         
         assertTrue(
-            description.contains("Alice strikes Bob's HEAD with Sword for 34 damage (critical hit!)"),
+            description.contains(
+                "Alice strikes Bob's HEAD with Sword for 34 damage (critical hit!)"
+            ),
             "Expected Alice's strike description. Actual: " + description
         );
         assertTrue(
-            description.contains("Bob strikes Alice's TORSO with Axe for 0 damage - BLOCKED by parry."),
+            description.contains(
+                "Bob strikes Alice's TORSO with Axe for 0 damage - BLOCKED by parry."
+            ),
             "Expected Bob's blocked strike description. Actual: " + description
         );
     }
@@ -354,21 +385,35 @@ class CombatTest {
         String description = result.description();
         
         assertTrue(
-            description.contains("Charlie strikes Diana's TORSO with Mace for 0 damage - BLOCKED by parry."),
-            "Expected description to contain Charlie's blocked strike. Actual: " + description
+            description.contains(
+                "Charlie strikes Diana's TORSO with Mace for 0 damage - BLOCKED by parry."
+            ),
+            "Expected description to contain Charlie's blocked strike. Actual: " 
+                + description
         );
         assertTrue(
-            description.contains("Diana strikes Charlie's LEGS with Dagger for 8 damage (critical hit!)"),
-            "Expected description to contain Diana's critical strike. Actual: " + description
+            description.contains(
+                "Diana strikes Charlie's LEGS with Dagger for 8 damage (critical hit!)"
+            ),
+            "Expected description to contain Diana's critical strike. Actual: " 
+                + description
         );
     }
     
     @Test
     void fighterKeepsHistoryOfStrikesCarriedOut() {
-        Fighter alice = new Fighter("Alice", 100);
-        Fighter bob = new Fighter("Bob", 100);
+        Fighter alice = new Fighter(
+            "Alice", 100,
+            new FixedScript(
+                List.of(BodyPart.HEAD, BodyPart.TORSO), 
+                List.of(BodyPart.TORSO)
+            )
+        );
+        Fighter bob = new Fighter(
+            "Bob", 100, new FixedScript(BodyPart.TORSO, BodyPart.TORSO)
+        );
         
-        alice.strike(bob, BodyPart.HEAD);
+        alice.strike(bob);
         
         assertEquals(1, alice.strikesCarriedOut().size());
         Strike firstStrike = alice.strikesCarriedOut().get(0);
@@ -377,8 +422,8 @@ class CombatTest {
         assertFalse(firstStrike.wasCriticalHit());
         assertFalse(firstStrike.wasParried());
         
-        bob.parry(BodyPart.TORSO);
-        alice.strike(bob, BodyPart.TORSO);
+        bob.parry(alice);
+        alice.strike(bob);
         
         assertEquals(2, alice.strikesCarriedOut().size());
         Strike secondStrike = alice.strikesCarriedOut().get(1);
@@ -390,11 +435,23 @@ class CombatTest {
     
     @Test
     void fighterKeepsHistoryOfStrikesSuffered() {
-        Fighter alice = new Fighter("Alice", 100);
-        Fighter bob = new Fighter("Bob", 100);
+        Fighter alice = new Fighter(
+            "Alice", 100, 
+            new FixedScript(
+                List.of(BodyPart.HEAD, BodyPart.TORSO), 
+                List.of(BodyPart.TORSO)
+            )
+        );
+        Fighter bob = new Fighter(
+            "Bob", 100,
+            new FixedScript(
+                List.of(BodyPart.TORSO), 
+                List.of(BodyPart.HEAD)
+            )
+        );
         
         alice.equipWeapon(new Weapon("Critical Sword", 4, 1.0));
-        alice.strike(bob, BodyPart.HEAD);
+        alice.strike(bob);
         
         assertEquals(1, bob.strikesSuffered().size());
         Strike firstStrike = bob.strikesSuffered().get(0);
@@ -404,8 +461,8 @@ class CombatTest {
         assertFalse(firstStrike.wasParried());
         
         alice.equipWeapon(new Weapon("Normal Sword", 3));
-        bob.parry(BodyPart.HEAD);
-        alice.strike(bob, BodyPart.TORSO);
+        bob.parry(alice);
+        alice.strike(bob);
         
         assertEquals(2, bob.strikesSuffered().size());
         Strike secondStrike = bob.strikesSuffered().get(1);

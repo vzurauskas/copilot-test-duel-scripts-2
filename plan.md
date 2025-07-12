@@ -120,3 +120,7 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 - Each test should be implemented one at a time following Red-Green-Refactor
 - Commit after each green test with proper structural/behavioral change designation
 - Keep implementations minimal - only enough code to make tests pass
+
+## Next
+- Replace the inlined scripts in tests with the new one.
+- Finish refactoring Combat and CombatResult.
