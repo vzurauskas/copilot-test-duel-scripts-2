@@ -42,14 +42,24 @@ public class Fighter {
         return hitPoints > 0;
     }
 
-    public void parry(BodyPart bodyPart) {
+    void parry(BodyPart bodyPart) {
         this.parryingBodyPart = bodyPart;
     }
 
-    public void strike(Fighter target, BodyPart bodyPart) {
+    public void parry(Fighter opponent) {
+        BodyPart parryBodyPart = script.parry(this, opponent);
+        parry(parryBodyPart);
+    }
+
+    void strike(Fighter target, BodyPart bodyPart) {
         Strike strike = weapon.strike(bodyPart, target.parryingBodyPart);
         strikesCarriedOut.add(strike);
         target.takeHit(strike);
+    }
+
+    public void strike(Fighter target) {
+        BodyPart targetBodyPart = script.strike(this, target);
+        strike(target, targetBodyPart);
     }
 
     public void takeHit(Strike strike) {
@@ -65,10 +75,6 @@ public class Fighter {
 
     public List<Strike> strikesSuffered() {
         return strikesSuffered;
-    }
-
-    public Script getScript() {
-        return script;
     }
 
     public Weapon getWeapon() {

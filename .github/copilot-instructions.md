@@ -58,9 +58,11 @@ Repeat the cycle for new functionality.
     3. The change represents a single logical unit of work
     4. Commit messages clearly state whether the commit contains structural or behavioral changes
 - Use small, frequent commits rather than large, infrequent ones
-- Write a clear commit title and a **concise** extended description.
-    - State the purpose of the change.
-    - Don't just list what was changed, as that can be seen in the diff.
+- Write a clear commit title and a **concise** description (max 4 lines).
+    - Focus on WHY the change was made and its benefits, not WHAT was changed.
+    - The diff shows what changed; the message should explain the purpose.
+    - Good example: "Structural change: Encapsulate Script usage in Fighter to increase cohesion."
+    - Bad example: [long detailed list of every change]
 
 # CODE QUALITY STANDARDS
 
