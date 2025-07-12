@@ -7,34 +7,84 @@ class CombatTest {
 
     @Test
     void oneStrikesAnotherInHead() {
-        Fighter alice = new Fighter("Alice", 100);
+        Fighter alice = new Fighter("Alice", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+        });
         Fighter bob = new Fighter("Bob", 100);
         
-        alice.strike(bob, BodyPart.HEAD);
+        alice.strike(bob);
         
         assertTrue(bob.hitPoints() < 100);
     }
 
     @Test
     void parryBlocksStrike() {
-        Fighter alice = new Fighter("Alice", 100);
-        Fighter bob = new Fighter("Bob", 100);
+        Fighter alice = new Fighter("Alice", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+        });
+        Fighter bob = new Fighter("Bob", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD;
+            }
+        });
         
-        bob.parry(BodyPart.HEAD);
-        alice.strike(bob, BodyPart.HEAD);
+        bob.parry(alice);
+        alice.strike(bob);
         
         assertEquals(100, bob.hitPoints());
     }
 
     @Test
     void bothStrikesLandWhenNoParrying() {
-        Fighter alice = new Fighter("Alice", 100);
-        Fighter bob = new Fighter("Bob", 100);
+        Fighter alice = new Fighter("Alice", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.LEGS;
+            }
+        });
+        Fighter bob = new Fighter("Bob", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD;
+            }
+        });
         
-        alice.parry(BodyPart.LEGS);
-        bob.strike(alice, BodyPart.HEAD);
-        bob.parry(BodyPart.HEAD);
-        alice.strike(bob, BodyPart.TORSO);
+        alice.parry(bob);
+        bob.strike(alice);
+        bob.parry(alice);
+        alice.strike(bob);
         
         assertTrue(alice.hitPoints() < 100);
         assertTrue(bob.hitPoints() < 100);
@@ -42,13 +92,33 @@ class CombatTest {
 
     @Test
     void bothStrikesAreBlockedWhenParrying() {
-        Fighter alice = new Fighter("Alice", 100);
-        Fighter bob = new Fighter("Bob", 100);
+        Fighter alice = new Fighter("Alice", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD;
+            }
+        });
+        Fighter bob = new Fighter("Bob", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+        });
         
-        alice.parry(BodyPart.HEAD);
-        bob.strike(alice, BodyPart.HEAD);
-        bob.parry(BodyPart.TORSO);
-        alice.strike(bob, BodyPart.TORSO);
+        alice.parry(bob);
+        bob.strike(alice);
+        bob.parry(alice);
+        alice.strike(bob);
         
         assertEquals(100, alice.hitPoints());
         assertEquals(100, bob.hitPoints());
@@ -88,11 +158,21 @@ class CombatTest {
     @Test
     void fighterDiesWhenHitPointsReachZero() {
         Fighter alice = new Fighter("Alice", 1);
-        Fighter bob = new Fighter("Bob", 100);
+        Fighter bob = new Fighter("Bob", 100, new Script() {
+            @Override
+            public BodyPart strike(Fighter self, Fighter opponent) {
+                return BodyPart.HEAD;
+            }
+            
+            @Override
+            public BodyPart parry(Fighter self, Fighter opponent) {
+                return BodyPart.TORSO;
+            }
+        });
         
         assertTrue(alice.isAlive());
         
-        bob.strike(alice, BodyPart.HEAD);
+        bob.strike(alice);
         
         assertFalse(alice.isAlive());
     }
