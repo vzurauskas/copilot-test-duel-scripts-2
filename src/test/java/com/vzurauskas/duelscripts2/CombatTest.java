@@ -299,8 +299,14 @@ class CombatTest {
     
     @Test
     void combatResultForDifferentFightersContainsStrikeOutcomes() {
-        Fighter charlie = new Fighter("Charlie", 100, new CharlieScript());
-        Fighter diana = new Fighter("Diana", 100, new DianaScript());
+        Fighter charlie = new Fighter(
+            "Charlie", 100, 
+            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+        );
+        Fighter diana = new Fighter(
+            "Diana", 100, 
+            new FixedScript(BodyPart.LEGS, BodyPart.TORSO)
+        );
         
         charlie.equipWeapon(new Weapon("Mace", 15));
         diana.equipWeapon(new Weapon("Dagger", 8, 1.0));
