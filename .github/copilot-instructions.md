@@ -122,6 +122,45 @@ Always write one test at a time, make it run, then improve structure. Always run
 ### Tests
 -  Test method names should be a sentence describing the behaviour being tested in present tense, e.g. `fighterDiesWhenHitPointsReachZero`, `fighterWithWeaponDealsMoreDamageThanWithout`, `criticalHitDealsDoubleDamage`, etc.
 
+## Code Formatting
+- Max line length: 80 characters.
+- Use line breaks to keep lines within this limit.
+
+### Line Breaking Rules for Method Calls and Constructor Calls
+**Rule**: For method signatures or constructor calls, break after the opening parenthesis. If there is a line break after the opening parenthesis, there MUST also be a line break before the closing parenthesis.
+
+**CORRECT examples:**
+```java
+// Short enough to fit on one line - no line breaks needed
+Fighter bob = new Fighter("Bob", 100);
+
+// Breaks after opening parenthesis, breaks before closing parenthesis
+Fighter alice = new Fighter(
+    "Alice", 100, 
+    new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+);
+
+// Multiple parameters that need breaking
+assertTrue(
+    description.contains("expected text"),
+    "Error message here"
+);
+```
+
+**INCORRECT examples:**
+```java
+// BAD: Breaks after opening parenthesis but NOT before closing parenthesis
+Fighter bob = new Fighter("Bob", 100, 
+    new FixedScript(BodyPart.HEAD, BodyPart.TORSO));
+
+// BAD: Breaks in the middle but not consistently
+Fighter alice = new Fighter("Alice", 100,
+    new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+);
+```
+
+**Key principle**: Either keep the entire call on one line OR break after the opening parenthesis AND before the closing parenthesis. Never mix these styles.
+
 
 # RUNNING TERMINAL COMMANDS
 (This is to ensure proper output in GitHub Codespaces.)

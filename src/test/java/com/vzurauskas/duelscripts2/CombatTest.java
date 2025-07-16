@@ -8,7 +8,8 @@ class CombatTest {
 
     @Test
     void oneStrikesAnotherInHead() {
-        Fighter alice = new Fighter("Alice", 100, 
+        Fighter alice = new Fighter(
+            "Alice", 100, 
             new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
         );
         Fighter bob = new Fighter("Bob", 100);
@@ -20,28 +21,14 @@ class CombatTest {
 
     @Test
     void parryBlocksStrike() {
-        Fighter alice = new Fighter("Alice", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-        });
-        Fighter bob = new Fighter("Bob", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD;
-            }
-        });
+        Fighter alice = new Fighter(
+            "Alice", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+        );
+        Fighter bob = new Fighter(
+            "Bob", 100, 
+            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+        );
         
         bob.parry(alice);
         alice.strike(bob);
@@ -51,28 +38,14 @@ class CombatTest {
 
     @Test
     void bothStrikesLandWhenNoParrying() {
-        Fighter alice = new Fighter("Alice", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.LEGS;
-            }
-        });
-        Fighter bob = new Fighter("Bob", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD;
-            }
-        });
+        Fighter alice = new Fighter(
+            "Alice", 100, 
+            new FixedScript(BodyPart.TORSO, BodyPart.LEGS)
+        );
+        Fighter bob = new Fighter(
+            "Bob", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.HEAD)
+        );
         
         alice.parry(bob);
         bob.strike(alice);
@@ -85,28 +58,14 @@ class CombatTest {
 
     @Test
     void bothStrikesAreBlockedWhenParrying() {
-        Fighter alice = new Fighter("Alice", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD;
-            }
-        });
-        Fighter bob = new Fighter("Bob", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-        });
+        Fighter alice = new Fighter(
+            "Alice", 100, 
+            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+        );
+        Fighter bob = new Fighter(
+            "Bob", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+        );
         
         alice.parry(bob);
         bob.strike(alice);
@@ -166,17 +125,10 @@ class CombatTest {
     @Test
     void fighterDiesWhenHitPointsReachZero() {
         Fighter alice = new Fighter("Alice", 1);
-        Fighter bob = new Fighter("Bob", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-        });
+        Fighter bob = new Fighter(
+            "Bob", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+        );
         
         assertTrue(alice.isAlive());
         
@@ -287,34 +239,20 @@ class CombatTest {
     
     @Test
     void combatResultContainsDamageDealt() {
-        Fighter alice = new Fighter("Alice", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-        });
+        Fighter alice = new Fighter(
+            "Alice", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+        );
         
-        Fighter bob = new Fighter("Bob", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD; // Block Alice's HEAD strike
-            }
-        });
+        Fighter bob = new Fighter(
+            "Bob", 100, 
+            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+        );
         
         // Set up weapons - doesn't matter much since both 
         // strikes will be blocked
         alice.equipWeapon(new Weapon("Sword", 20, 1.0)); 
-        bob.equipWeapon(new Weapon("Axe", 10)); 
+        bob.equipWeapon(new Weapon("Axe", 10));
         
         Combat combat = new Combat(alice, bob);
         CombatResult result = combat.nextTurn();
@@ -325,29 +263,15 @@ class CombatTest {
     
     @Test
     void combatResultContainsStrikeOutcomes() {
-        Fighter alice = new Fighter("Alice", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.HEAD;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-        });
+        Fighter alice = new Fighter(
+            "Alice", 100, 
+            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+        );
         
-        Fighter bob = new Fighter("Bob", 100, new Script() {
-            @Override
-            public BodyPart strike(Fighter self, Fighter opponent) {
-                return BodyPart.TORSO;
-            }
-            
-            @Override
-            public BodyPart parry(Fighter self, Fighter opponent) {
-                return BodyPart.LEGS; 
-            }
-        });
+        Fighter bob = new Fighter(
+            "Bob", 100, 
+            new FixedScript(BodyPart.TORSO, BodyPart.LEGS)
+        );
         
         alice.equipWeapon(new Weapon("Sword", 10, 1.0));
         bob.equipWeapon(new Weapon("Axe", 10));
@@ -359,13 +283,15 @@ class CombatTest {
         
         assertTrue(
             description.contains(
-                "Alice strikes Bob's HEAD with Sword for 34 damage (critical hit!)"
+                "Alice strikes Bob's HEAD with Sword for 34 damage " +
+                "(critical hit!)"
             ),
             "Expected Alice's strike description. Actual: " + description
         );
         assertTrue(
             description.contains(
-                "Bob strikes Alice's TORSO with Axe for 0 damage - BLOCKED by parry."
+                "Bob strikes Alice's TORSO with Axe for 0 damage - " +
+                "BLOCKED by parry."
             ),
             "Expected Bob's blocked strike description. Actual: " + description
         );
@@ -386,17 +312,19 @@ class CombatTest {
         
         assertTrue(
             description.contains(
-                "Charlie strikes Diana's TORSO with Mace for 0 damage - BLOCKED by parry."
+                "Charlie strikes Diana's TORSO with Mace for 0 damage - " +
+                "BLOCKED by parry."
             ),
-            "Expected description to contain Charlie's blocked strike. Actual: " 
-                + description
+            "Expected description to contain Charlie's blocked strike. " +
+                "Actual: " + description
         );
         assertTrue(
             description.contains(
-                "Diana strikes Charlie's LEGS with Dagger for 8 damage (critical hit!)"
+                "Diana strikes Charlie's LEGS with Dagger for 8 damage " +
+                "(critical hit!)"
             ),
-            "Expected description to contain Diana's critical strike. Actual: " 
-                + description
+            "Expected description to contain Diana's critical strike. " +
+                "Actual: " + description
         );
     }
     
