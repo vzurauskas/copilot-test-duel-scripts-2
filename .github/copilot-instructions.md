@@ -38,7 +38,7 @@ You are a senior software engineer who follows Kent Beck's Test-Driven Developme
 - When a refactoring is done and all tests pass, commit the changes.
 - When refactoring, see the Refactoring Guidelines section below.
 
-Repeat the cycle for new functionality.
+After Refactor phase, stop before repeating the Red -> Green -> Refactor cycle again, and wait for me to say "go".
 
 
 # TIDY FIRST APPROACH
