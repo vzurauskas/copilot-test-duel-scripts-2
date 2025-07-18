@@ -152,7 +152,6 @@ These improvements would further encapsulate behavior in domain objects and redu
 
 ## Next
 - Finish refactoring Combat and CombatResult.
-  - Script should return StrikeTarget (but see if Claude can figure it out).
   - Fighter shouldn't need both FighterBodyPart parryingFighterBodyPart() and BodyPart parryingBodyPart().
   - Refactor Fighter#strike - no chain.
 - See if Weapon can be refactored.

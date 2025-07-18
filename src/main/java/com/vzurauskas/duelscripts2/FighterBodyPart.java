@@ -18,7 +18,7 @@ public class FighterBodyPart {
     }
 
     public boolean isBeingParried() {
-        return fighter.parryingBodyPart() == bodyPart;
+        return fighter.parryingFighterBodyPart().equals(this);
     }
 
     @Override
