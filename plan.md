@@ -148,10 +148,3 @@ After completing the current FighterBodyPart refactoring, consider these domain 
 
 These improvements would further encapsulate behavior in domain objects and reduce coupling between classes.
 
-
-
-## Next
-- Finish refactoring Combat and CombatResult.
-  - Fighter shouldn't need both FighterBodyPart parryingFighterBodyPart() and BodyPart parryingBodyPart().
-  - Refactor Fighter#strike - no chain.
-- See if Weapon can be refactored.

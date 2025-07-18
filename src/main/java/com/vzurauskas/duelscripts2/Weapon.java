@@ -21,9 +21,7 @@ public class Weapon {
 
     public Strike strike(Fighter striker, FighterBodyPart target) {
         if (target.isBeingParried()) {
-            return new Strike(
-                striker, target, 0, false, target.fighter().parryingFighterBodyPart()
-            );
+            return new Strike(striker, target, 0, false, target);
         } else {
             int baseDamage = (int)(damage * target.bodyPart().multiplier());
             boolean isCritical = Math.random() < criticalHitChance;

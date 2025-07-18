@@ -6,7 +6,7 @@ import java.util.List;
 public class Fighter {
     private final String name;
     private int hitPoints;
-    private BodyPart parryingBodyPart;
+    private FighterBodyPart parryingBodyPart;
     private Weapon weapon;
     private final List<Strike> strikesCarriedOut;
     private final List<Strike> strikesSuffered;
@@ -19,7 +19,7 @@ public class Fighter {
     public Fighter(String name, int hitPoints, Script script) {
         this.name = name;
         this.hitPoints = hitPoints;
-        this.parryingBodyPart = BodyPart.TORSO;
+        this.parryingBodyPart = new FighterBodyPart(this, BodyPart.TORSO);
         this.weapon = new Weapon("Fist", 3);
         this.strikesCarriedOut = new ArrayList<>();
         this.strikesSuffered = new ArrayList<>();
@@ -43,8 +43,7 @@ public class Fighter {
     }
 
     public void parry(Fighter opponent) {
-        FighterBodyPart parryBodyPart = script.parry(this, opponent);
-        this.parryingBodyPart = parryBodyPart.bodyPart();
+        this.parryingBodyPart = script.parry(this, opponent);
     }
 
     public void strike(Fighter target) {
@@ -90,7 +89,7 @@ public class Fighter {
     }
 
     public FighterBodyPart parryingFighterBodyPart() {
-        return new FighterBodyPart(this, parryingBodyPart);
+        return parryingBodyPart;
     }
 
     public FighterBodyPart bodyPart(BodyPart bodyPart) {
