@@ -2,16 +2,18 @@ package com.vzurauskas.duelscripts2;
 
 public class Strike {
     private final Fighter striker;
+    private final Fighter defender;
     private final BodyPart target;
     private final int damage;
     private final boolean criticalHit;
     private final BodyPart parried;
 
     public Strike(
-        Fighter striker, BodyPart target, int damage, boolean criticalHit, 
-        BodyPart parried
+        Fighter striker, Fighter defender, BodyPart target, int damage, 
+        boolean criticalHit, BodyPart parried
     ) {
         this.striker = striker;
+        this.defender = defender;
         this.target = target;
         this.damage = damage;
         this.criticalHit = criticalHit;
@@ -26,16 +28,16 @@ public class Strike {
         return parried == target;
     }
 
-    public int damageDealt() {
-        return wasParried() ? 0 : damage;
+    public String damageReport() {
+        return "%s: %d damage".formatted(defender.name(), wasParried() ? 0 : damage);
     }
 
-    public String description(String defenderName) {
+    public String description() {
         String criticalHitSuffix = criticalHit ? " (critical hit!)" : "";
         String parriedSuffix = wasParried() ? " - BLOCKED by parry." : "";
         
         return "%s strikes %s's %s with %s for %d damage%s%s".formatted(
-            striker.name(), defenderName, target, striker.getWeapon().name(), 
+            striker.name(), defender.name(), target, striker.getWeapon().name(), 
             damage, criticalHitSuffix, parriedSuffix
         );
     }
@@ -48,6 +50,7 @@ public class Strike {
         return damage == strike.damage &&
                criticalHit == strike.criticalHit &&
                striker.equals(strike.striker) &&
+               defender.equals(strike.defender) &&
                target == strike.target &&
                parried == strike.parried;
     }
@@ -55,7 +58,7 @@ public class Strike {
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
-            striker, target, damage, criticalHit, parried
+            striker, defender, target, damage, criticalHit, parried
         );
     }
 }

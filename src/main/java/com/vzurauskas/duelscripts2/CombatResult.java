@@ -18,20 +18,20 @@ public class CombatResult {
         Strike f1LastStrike = f1Strikes.get(f1Strikes.size() - 1);
         Strike f2LastStrike = f2Strikes.get(f2Strikes.size() - 1);
         
-        String f1StrikeDesc = f1LastStrike.description(fighter2.name());
-        String f2StrikeDesc = f2LastStrike.description(fighter1.name());
+        String f1StrikeDesc = f1LastStrike.description();
+        String f2StrikeDesc = f2LastStrike.description();
         
         return """
             %s
             %s
             
-            %s: %d damage
-            %s: %d damage
+            %s
+            %s
         """.formatted(
             f1StrikeDesc,
             f2StrikeDesc,
-            fighter1.name(), f2LastStrike.damageDealt(),
-            fighter2.name(), f1LastStrike.damageDealt()
+            f2LastStrike.damageReport(),
+            f1LastStrike.damageReport()
         );
     }
 }

@@ -19,14 +19,14 @@ public class Weapon {
         return name;
     }
 
-    public Strike strike(Fighter striker, BodyPart target, BodyPart parried) {
+    public Strike strike(Fighter striker, Fighter defender, BodyPart target, BodyPart parried) {
         if (parried == target) {
-            return new Strike(striker, target, 0, false, parried);
+            return new Strike(striker, defender, target, 0, false, parried);
         } else {
             int baseDamage = (int)(damage * target.multiplier());
             boolean isCritical = Math.random() < criticalHitChance;
             int finalDamage = isCritical ? baseDamage * 2 : baseDamage;
-            return new Strike(striker, target, finalDamage, isCritical, parried);
+            return new Strike(striker, defender, target, finalDamage, isCritical, parried);
         }
     }
 }

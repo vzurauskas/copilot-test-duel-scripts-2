@@ -123,3 +123,5 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 
 ## Next
 - Finish refactoring Combat and CombatResult.
+  - CombatResult should take strikes, not fighters.
+  - Script should return StrikeTarget (but see if Claude can figure it out).
