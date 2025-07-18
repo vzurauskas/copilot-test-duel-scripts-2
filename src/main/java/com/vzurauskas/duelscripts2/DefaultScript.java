@@ -2,8 +2,8 @@ package com.vzurauskas.duelscripts2;
 
 public class DefaultScript implements Script {
     @Override
-    public BodyPart strike(Fighter self, Fighter opponent) {
-        return BodyPart.HEAD;
+    public FighterBodyPart strike(Fighter self, Fighter opponent) {
+        return opponent.head();
     }
     
     @Override

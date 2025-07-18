@@ -121,7 +121,38 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 - Commit after each green test with proper structural/behavioral change designation
 - Keep implementations minimal - only enough code to make tests pass
 
+## Future Domain Improvements (Post-Phase 4)
+
+### FighterBodyPart Rich Domain Object Enhancements
+After completing the current FighterBodyPart refactoring, consider these domain improvements:
+
+1. **Damage Calculation Encapsulation**
+   - Move `target.bodyPart().multiplier()` logic into `FighterBodyPart.damageMultiplier()`
+   - Encapsulate body part damage logic within the domain object
+
+2. **Strike Receiving Behavior**
+   - Add `FighterBodyPart.receiveStrike(weapon, striker)` method
+   - Let the body part handle strike reception logic
+
+3. **Parrying Intelligence**
+   - Add `FighterBodyPart.attemptStrike(weapon, striker)` method
+   - Move parrying logic into the body part itself
+
+4. **Fighter.strike() Simplification**
+   - Leverage rich FighterBodyPart behavior to simplify Fighter methods
+   - Reduce parameter passing and external logic
+
+5. **Rich Factory Methods**
+   - Add `fighter.bodyPartToStrike(BodyPart)` conversion method
+   - Add context-aware body part creation methods
+
+These improvements would further encapsulate behavior in domain objects and reduce coupling between classes.
+
+
+
 ## Next
 - Finish refactoring Combat and CombatResult.
-  - CombatResult should take strikes, not fighters.
   - Script should return StrikeTarget (but see if Claude can figure it out).
+  - Fighter shouldn't need both FighterBodyPart parryingFighterBodyPart() and BodyPart parryingBodyPart().
+  - Refactor Fighter#strike - no chain.
+- See if Weapon can be refactored.

@@ -18,11 +18,11 @@ public class FixedScript implements Script {
     }
 
     @Override
-    public BodyPart strike(Fighter self, Fighter opponent) {
+    public FighterBodyPart strike(Fighter self, Fighter opponent) {
         if (strikeTargets.isEmpty()) {
             throw new IllegalStateException("No more strike targets available");
         }
-        return strikeTargets.remove(0);
+        return opponent.bodyPart(strikeTargets.remove(0));
     }
 
     @Override

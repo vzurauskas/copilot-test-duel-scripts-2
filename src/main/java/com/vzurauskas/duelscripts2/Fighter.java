@@ -48,12 +48,14 @@ public class Fighter {
     }
 
     public void strike(Fighter target) {
-        BodyPart targetBodyPart = script.strike(this, target);
-        Strike strike = weapon.strike(
-            this, target, targetBodyPart, target.parryingBodyPart
-        );
+        FighterBodyPart targetBodyPart = script.strike(this, target);
+        this.strike(targetBodyPart);
+    }
+
+    public void strike(FighterBodyPart target) {
+        Strike strike = weapon.strike(this, target);
         strikesCarriedOut.add(strike);
-        target.takeHit(strike);
+        target.fighter().takeHit(strike);
     }
 
     public void takeHit(Strike strike) {
@@ -77,5 +79,29 @@ public class Fighter {
 
     public Weapon getWeapon() {
         return weapon;
+    }
+
+    public BodyPart parryingBodyPart() {
+        return parryingBodyPart;
+    }
+
+    public FighterBodyPart head() {
+        return new FighterBodyPart(this, BodyPart.HEAD);
+    }
+
+    public FighterBodyPart torso() {
+        return new FighterBodyPart(this, BodyPart.TORSO);
+    }
+
+    public FighterBodyPart legs() {
+        return new FighterBodyPart(this, BodyPart.LEGS);
+    }
+
+    public FighterBodyPart parryingFighterBodyPart() {
+        return new FighterBodyPart(this, parryingBodyPart);
+    }
+
+    public FighterBodyPart bodyPart(BodyPart bodyPart) {
+        return new FighterBodyPart(this, bodyPart);
     }
 }

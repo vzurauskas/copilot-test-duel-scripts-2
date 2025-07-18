@@ -9,15 +9,15 @@ public class Strike {
     private final BodyPart parried;
 
     public Strike(
-        Fighter striker, Fighter defender, BodyPart target, int damage, 
-        boolean criticalHit, BodyPart parried
+        Fighter striker, FighterBodyPart target, int damage, 
+        boolean criticalHit, FighterBodyPart parried
     ) {
         this.striker = striker;
-        this.defender = defender;
-        this.target = target;
+        this.defender = target.fighter();
+        this.target = target.bodyPart();
         this.damage = damage;
         this.criticalHit = criticalHit;
-        this.parried = parried;
+        this.parried = parried.bodyPart();
     }
 
     public int damage() {
