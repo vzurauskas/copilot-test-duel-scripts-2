@@ -21,18 +21,17 @@ public class CombatResult {
         String f1StrikeDesc = f1LastStrike.description(fighter2.name());
         String f2StrikeDesc = f2LastStrike.description(fighter1.name());
         
-        int f1Damage = f2LastStrike.wasParried() ? 0 : f2LastStrike.damage();
-        int f2Damage = f1LastStrike.wasParried() ? 0 : f1LastStrike.damage();
-        
         return """
             %s
             %s
             
             %s: %d damage
-            %s: %d damage""".formatted(
-            f1StrikeDesc, f2StrikeDesc,
-            fighter1.name(), f1Damage,
-            fighter2.name(), f2Damage
+            %s: %d damage
+        """.formatted(
+            f1StrikeDesc,
+            f2StrikeDesc,
+            fighter1.name(), f2LastStrike.damageDealt(),
+            fighter2.name(), f1LastStrike.damageDealt()
         );
     }
 }

@@ -26,6 +26,10 @@ public class Strike {
         return parried == target;
     }
 
+    public int damageDealt() {
+        return wasParried() ? 0 : damage;
+    }
+
     public String description(String defenderName) {
         String criticalHitSuffix = criticalHit ? " (critical hit!)" : "";
         String parriedSuffix = wasParried() ? " - BLOCKED by parry." : "";
