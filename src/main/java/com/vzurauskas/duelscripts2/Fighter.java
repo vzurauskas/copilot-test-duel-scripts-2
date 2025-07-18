@@ -43,8 +43,8 @@ public class Fighter {
     }
 
     public void parry(Fighter opponent) {
-        BodyPart parryBodyPart = script.parry(this, opponent);
-        this.parryingBodyPart = parryBodyPart;
+        FighterBodyPart parryBodyPart = script.parry(this, opponent);
+        this.parryingBodyPart = parryBodyPart.bodyPart();
     }
 
     public void strike(Fighter target) {

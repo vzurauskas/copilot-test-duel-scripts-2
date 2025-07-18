@@ -7,7 +7,7 @@ public class DefaultScript implements Script {
     }
     
     @Override
-    public BodyPart parry(Fighter self, Fighter opponent) {
-        return BodyPart.TORSO;
+    public FighterBodyPart parry(Fighter self, Fighter opponent) {
+        return self.torso();
     }
 }

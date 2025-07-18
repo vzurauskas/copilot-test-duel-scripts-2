@@ -26,10 +26,10 @@ public class FixedScript implements Script {
     }
 
     @Override
-    public BodyPart parry(Fighter self, Fighter opponent) {
+    public FighterBodyPart parry(Fighter self, Fighter opponent) {
         if (parryTargets.isEmpty()) {
             throw new IllegalStateException("No more parry targets available");
         }
-        return parryTargets.remove(0);
+        return self.bodyPart(parryTargets.remove(0));
     }
 }
