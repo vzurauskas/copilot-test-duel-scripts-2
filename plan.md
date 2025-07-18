@@ -122,5 +122,4 @@ Implement a turn-based combat system where two fighters can engage in combat, st
 - Keep implementations minimal - only enough code to make tests pass
 
 ## Next
-- Replace the inlined scripts in tests with the new one.
 - Finish refactoring Combat and CombatResult.

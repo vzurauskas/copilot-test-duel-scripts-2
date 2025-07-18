@@ -111,6 +111,8 @@ Always write one test at a time, make it run, then improve structure. Always run
 - Separate constructors into two distinct types:
   1. **Primary Constructors**: they only set fields. A class can have only one of these. It should be placed below all other constructors.
   2. **Secondary Constructors**: they only delegate to other secondary or primary constructors. A class can have multiple of these.
+- Never use setters. Use constructors to set all fields.
+- Avoid getters vigorously.
 
 ## Naming
 

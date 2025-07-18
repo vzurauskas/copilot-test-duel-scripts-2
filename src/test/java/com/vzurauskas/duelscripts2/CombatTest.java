@@ -350,21 +350,19 @@ class CombatTest {
         alice.strike(bob);
         
         assertEquals(1, alice.strikesCarriedOut().size());
-        Strike firstStrike = alice.strikesCarriedOut().get(0);
-        assertEquals(BodyPart.HEAD, firstStrike.target());
-        assertEquals(5, firstStrike.damage());
-        assertFalse(firstStrike.wasCriticalHit());
-        assertFalse(firstStrike.wasParried());
+        Strike expectedFirstStrike = new Strike(
+            alice, BodyPart.HEAD, 5, false, BodyPart.TORSO
+        );
+        assertEquals(expectedFirstStrike, alice.strikesCarriedOut().get(0));
         
         bob.parry(alice);
         alice.strike(bob);
         
         assertEquals(2, alice.strikesCarriedOut().size());
-        Strike secondStrike = alice.strikesCarriedOut().get(1);
-        assertEquals(BodyPart.TORSO, secondStrike.target());
-        assertEquals(0, secondStrike.damage());
-        assertFalse(secondStrike.wasCriticalHit());
-        assertTrue(secondStrike.wasParried());
+        Strike expectedSecondStrike = new Strike(
+            alice, BodyPart.TORSO, 0, false, BodyPart.TORSO
+        );
+        assertEquals(expectedSecondStrike, alice.strikesCarriedOut().get(1));
     }
     
     @Test
@@ -388,21 +386,19 @@ class CombatTest {
         alice.strike(bob);
         
         assertEquals(1, bob.strikesSuffered().size());
-        Strike firstStrike = bob.strikesSuffered().get(0);
-        assertEquals(BodyPart.HEAD, firstStrike.target());
-        assertEquals(12, firstStrike.damage());
-        assertTrue(firstStrike.wasCriticalHit());
-        assertFalse(firstStrike.wasParried());
+        Strike expectedFirstStrike = new Strike(
+            alice, BodyPart.HEAD, 12, true, BodyPart.TORSO
+        );
+        assertEquals(expectedFirstStrike, bob.strikesSuffered().get(0));
         
         alice.equipWeapon(new Weapon("Normal Sword", 3));
         bob.parry(alice);
         alice.strike(bob);
         
         assertEquals(2, bob.strikesSuffered().size());
-        Strike secondStrike = bob.strikesSuffered().get(1);
-        assertEquals(BodyPart.TORSO, secondStrike.target());
-        assertEquals(3, secondStrike.damage());
-        assertFalse(secondStrike.wasCriticalHit());
-        assertFalse(secondStrike.wasParried());
+        Strike expectedSecondStrike = new Strike(
+            alice, BodyPart.TORSO, 3, false, BodyPart.HEAD
+        );
+        assertEquals(expectedSecondStrike, bob.strikesSuffered().get(1));
     }
 }

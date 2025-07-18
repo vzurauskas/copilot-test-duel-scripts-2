@@ -49,7 +49,9 @@ public class Fighter {
 
     public void strike(Fighter target) {
         BodyPart targetBodyPart = script.strike(this, target);
-        Strike strike = weapon.strike(targetBodyPart, target.parryingBodyPart);
+        Strike strike = weapon.strike(
+            this, targetBodyPart, target.parryingBodyPart
+        );
         strikesCarriedOut.add(strike);
         target.takeHit(strike);
     }
