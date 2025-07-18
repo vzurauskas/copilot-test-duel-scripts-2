@@ -232,7 +232,7 @@ class CombatTest {
         Fighter bob = new Fighter("Bob", 100);
         
         Combat combat = new Combat(alice, bob);
-        CombatResult result = combat.nextTurn();
+        TurnResult result = combat.nextTurn();
         
         assertNotNull(result.description());
     }
@@ -255,7 +255,7 @@ class CombatTest {
         bob.equipWeapon(new Weapon("Axe", 10));
         
         Combat combat = new Combat(alice, bob);
-        CombatResult result = combat.nextTurn();
+        TurnResult result = combat.nextTurn();
         
         assertTrue(result.description().contains("Alice: 0 damage"));
         assertTrue(result.description().contains("Bob: 0 damage"));
@@ -277,7 +277,7 @@ class CombatTest {
         bob.equipWeapon(new Weapon("Axe", 10));
         
         Combat combat = new Combat(alice, bob);
-        CombatResult result = combat.nextTurn();
+        TurnResult result = combat.nextTurn();
         
         String description = result.description();
         
@@ -312,7 +312,7 @@ class CombatTest {
         diana.equipWeapon(new Weapon("Dagger", 8, 1.0));
         
         Combat combat = new Combat(charlie, diana);
-        CombatResult result = combat.nextTurn();
+        TurnResult result = combat.nextTurn();
         
         String description = result.description();
         

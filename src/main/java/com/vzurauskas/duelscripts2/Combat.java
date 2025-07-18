@@ -9,13 +9,16 @@ public class Combat {
         this.fighter2 = fighter2;
     }
 
-    public CombatResult nextTurn() {
+    public TurnResult nextTurn() {
         fighter1.parry(fighter2);
         fighter2.parry(fighter1);
         
         fighter1.strike(fighter2);
         fighter2.strike(fighter1);
         
-        return new CombatResult(fighter1, fighter2);
+        return new TurnResult(
+            fighter1.lastStrikeCarriedOut(), 
+            fighter2.lastStrikeCarriedOut()
+        );
     }
 }

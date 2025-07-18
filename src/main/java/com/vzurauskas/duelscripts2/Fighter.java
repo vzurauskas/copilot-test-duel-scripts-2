@@ -67,6 +67,10 @@ public class Fighter {
         return strikesCarriedOut;
     }
 
+    public Strike lastStrikeCarriedOut() {
+        return strikesCarriedOut.get(strikesCarriedOut.size() - 1);
+    }
+
     public List<Strike> strikesSuffered() {
         return strikesSuffered;
     }
