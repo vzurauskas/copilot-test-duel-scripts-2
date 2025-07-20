@@ -55,9 +55,7 @@ public class Fighter {
 
     public void takeHit(Strike strike) {
         strikesSuffered.add(strike);
-        if (!strike.wasParried()) {
-            hitPoints -= strike.damage();
-        }
+        hitPoints -= strike.damage();
     }
 
     public List<Strike> strikesCarriedOut() {

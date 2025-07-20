@@ -136,17 +136,4 @@ After completing the current FighterBodyPart refactoring, consider these domain 
    - Add `Weapon.hitStrike(striker, target)` for weapon-specific damage calculation
    - Simplify `Weapon.strike()` to call `target.receiveStrike(this, striker)`
 
-3. **Fighter.strike() Simplification**
-   - Leverage rich FighterBodyPart behavior to simplify Fighter methods
-   - Reduce parameter passing and external logic
-
-4. **Rich Factory Methods**
-   - Add `fighter.bodyPartToStrike(BodyPart)` conversion method
-   - Add context-aware body part creation methods
-
 These improvements would further encapsulate behavior in domain objects and reduce coupling between classes.
-
-### Next
-- Rename FighterBodyPart.
-- Remove Weapon from Strike receiveStrike (can get from striker)
-- consider inverting strike chain (strike method in weapon is weird)
