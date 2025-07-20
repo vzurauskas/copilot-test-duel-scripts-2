@@ -2,7 +2,6 @@ package com.vzurauskas.duelscripts2;
 
 public class Strike {
     private final Fighter striker;
-    private final Fighter defender;
     private final FighterBodyPart target;
     private final int damage;
     private final boolean criticalHit;
@@ -13,7 +12,6 @@ public class Strike {
         boolean criticalHit, FighterBodyPart parried
     ) {
         this.striker = striker;
-        this.defender = target.fighter();
         this.target = target;
         this.damage = damage;
         this.criticalHit = criticalHit;
@@ -29,7 +27,7 @@ public class Strike {
     }
 
     public String damageReport() {
-        return "%s: %d damage".formatted(defender.name(), wasParried() ? 0 : damage);
+        return "%s: %d damage".formatted(target.fighter().name(), wasParried() ? 0 : damage);
     }
 
     public String description() {
@@ -50,7 +48,6 @@ public class Strike {
         return damage == strike.damage &&
                criticalHit == strike.criticalHit &&
                striker.equals(strike.striker) &&
-               defender.equals(strike.defender) &&
                target.equals(strike.target) &&
                parried.equals(strike.parried);
     }
@@ -58,7 +55,7 @@ public class Strike {
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
-            striker, defender, target, damage, criticalHit, parried
+            striker, target, damage, criticalHit, parried
         );
     }
 }
