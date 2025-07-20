@@ -37,6 +37,14 @@ public final class FighterBodyPart {
         return fighter;
     }
 
+    public Strike receiveStrike(Weapon weapon, Fighter striker) {
+        if (this.isBeingParried()) {
+            return Strike.parried(striker, this);
+        } else {
+            return weapon.hitStrike(striker, this);
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

@@ -20,13 +20,13 @@ public class Weapon {
     }
 
     public Strike strike(Fighter striker, FighterBodyPart target) {
-        if (target.isBeingParried()) {
-            return Strike.parried(striker, target);
-        } else {
-            int baseDamage = target.calculateBaseDamage(damage);
-            boolean isCritical = Math.random() < criticalHitChance;
-            int finalDamage = isCritical ? baseDamage * 2 : baseDamage;
-            return Strike.hit(striker, target, finalDamage, isCritical);
-        }
+        return target.receiveStrike(this, striker);
+    }
+
+    public Strike hitStrike(Fighter striker, FighterBodyPart target) {
+        int baseDamage = target.calculateBaseDamage(damage);
+        boolean isCritical = Math.random() < criticalHitChance;
+        int finalDamage = isCritical ? baseDamage * 2 : baseDamage;
+        return Strike.hit(striker, target, finalDamage, isCritical);
     }
 }
