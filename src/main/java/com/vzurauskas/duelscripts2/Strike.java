@@ -2,13 +2,13 @@ package com.vzurauskas.duelscripts2;
 
 public class Strike {
     private final Fighter striker;
-    private final FighterBodyPart target;
+    private final BodyPart target;
     private final int damage;
     private final boolean criticalHit;
     private final boolean wasParried;
 
     private Strike(
-        Fighter striker, FighterBodyPart target, int damage, 
+        Fighter striker, BodyPart target, int damage, 
         boolean criticalHit, boolean wasParried
     ) {
         this.striker = striker;
@@ -19,13 +19,13 @@ public class Strike {
     }
 
     public static Strike hit(
-        Fighter striker, FighterBodyPart target, int damage, 
+        Fighter striker, BodyPart target, int damage, 
         boolean criticalHit
     ) {
         return new Strike(striker, target, damage, criticalHit, false);
     }
 
-    public static Strike parried(Fighter striker, FighterBodyPart target) {
+    public static Strike parried(Fighter striker, BodyPart target) {
         return new Strike(striker, target, 0, false, true);
     }
 

@@ -130,7 +130,7 @@ After completing the current FighterBodyPart refactoring, consider these domain 
    - Move `target.bodyPart().multiplier()` logic into `FighterBodyPart.damageMultiplier()`
    - Encapsulate body part damage logic within the domain object
 
-2. **Strike Reception Coordination**
+2. **Strike Reception Coordination** ✅
    - Add `FighterBodyPart.receiveStrike(weapon, striker)` method
    - FighterBodyPart coordinates parry checking and delegates to weapon for hits
    - Add `Weapon.hitStrike(striker, target)` for weapon-specific damage calculation

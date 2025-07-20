@@ -6,7 +6,7 @@ import java.util.List;
 public class Fighter {
     private final String name;
     private int hitPoints;
-    private FighterBodyPart parryingBodyPart;
+    private BodyPart parryingBodyPart;
     private Weapon weapon;
     private final List<Strike> strikesCarriedOut;
     private final List<Strike> strikesSuffered;
@@ -19,7 +19,7 @@ public class Fighter {
     public Fighter(String name, int hitPoints, Script script) {
         this.name = name;
         this.hitPoints = hitPoints;
-        this.parryingBodyPart = FighterBodyPart.torso(this);
+        this.parryingBodyPart = BodyPart.torso(this);
         this.weapon = new Weapon("Fist", 3);
         this.strikesCarriedOut = new ArrayList<>();
         this.strikesSuffered = new ArrayList<>();
@@ -47,7 +47,7 @@ public class Fighter {
     }
 
     public void strike(Fighter target) {
-        FighterBodyPart targetBodyPart = script.strike(this, target);
+        BodyPart targetBodyPart = script.strike(this, target);
         Strike strike = weapon.strike(this, targetBodyPart);
         strikesCarriedOut.add(strike);
         target.takeHit(strike);
@@ -76,19 +76,19 @@ public class Fighter {
         return weapon;
     }
 
-    public FighterBodyPart head() {
-        return FighterBodyPart.head(this);
+    public BodyPart head() {
+        return BodyPart.head(this);
     }
 
-    public FighterBodyPart torso() {
-        return FighterBodyPart.torso(this);
+    public BodyPart torso() {
+        return BodyPart.torso(this);
     }
 
-    public FighterBodyPart legs() {
-        return FighterBodyPart.legs(this);
+    public BodyPart legs() {
+        return BodyPart.legs(this);
     }
 
-    public FighterBodyPart parryingFighterBodyPart() {
+    public BodyPart parryingFighterBodyPart() {
         return parryingBodyPart;
     }
 }

@@ -1,11 +1,11 @@
 package com.vzurauskas.duelscripts2;
 
-public final class FighterBodyPart {
+public final class BodyPart {
     private final Fighter fighter;
     private final double multiplier;
     private final String name;
 
-    private FighterBodyPart(
+    private BodyPart(
         Fighter fighter, double multiplier, String name
     ) {
         this.fighter = fighter;
@@ -13,16 +13,16 @@ public final class FighterBodyPart {
         this.name = name;
     }
 
-    public static FighterBodyPart head(Fighter fighter) {
-        return new FighterBodyPart(fighter, 1.7, "head");
+    public static BodyPart head(Fighter fighter) {
+        return new BodyPart(fighter, 1.7, "head");
     }
 
-    public static FighterBodyPart torso(Fighter fighter) {
-        return new FighterBodyPart(fighter, 1.0, "torso");
+    public static BodyPart torso(Fighter fighter) {
+        return new BodyPart(fighter, 1.0, "torso");
     }
 
-    public static FighterBodyPart legs(Fighter fighter) {
-        return new FighterBodyPart(fighter, 0.5, "legs");
+    public static BodyPart legs(Fighter fighter) {
+        return new BodyPart(fighter, 0.5, "legs");
     }
 
     public int calculateBaseDamage(int weaponDamage) {
@@ -49,7 +49,7 @@ public final class FighterBodyPart {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        FighterBodyPart that = (FighterBodyPart) obj;
+        BodyPart that = (BodyPart) obj;
         return Double.compare(that.multiplier, multiplier) == 0 && 
                fighter.equals(that.fighter) && 
                name.equals(that.name);

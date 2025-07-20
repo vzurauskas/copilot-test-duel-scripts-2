@@ -6,26 +6,26 @@ import java.util.List;
 import java.util.function.Function;
 
 public class FixedScript implements Script {
-    private final List<Function<Fighter, FighterBodyPart>> strikeTargets;
-    private final List<Function<Fighter, FighterBodyPart>> parryTargets;
+    private final List<Function<Fighter, BodyPart>> strikeTargets;
+    private final List<Function<Fighter, BodyPart>> parryTargets;
 
     public FixedScript(
-        Function<Fighter, FighterBodyPart> strikeTarget, 
-        Function<Fighter, FighterBodyPart> parryTarget
+        Function<Fighter, BodyPart> strikeTarget, 
+        Function<Fighter, BodyPart> parryTarget
     ) {
         this(Arrays.asList(strikeTarget), Arrays.asList(parryTarget));
     }
 
     public FixedScript(
-        List<Function<Fighter, FighterBodyPart>> strikeTargets, 
-        List<Function<Fighter, FighterBodyPart>> parryTargets
+        List<Function<Fighter, BodyPart>> strikeTargets, 
+        List<Function<Fighter, BodyPart>> parryTargets
     ) {
         this.strikeTargets = new ArrayList<>(strikeTargets);
         this.parryTargets = new ArrayList<>(parryTargets);
     }
 
     @Override
-    public FighterBodyPart strike(Fighter self, Fighter opponent) {
+    public BodyPart strike(Fighter self, Fighter opponent) {
         if (strikeTargets.isEmpty()) {
             throw new IllegalStateException("No more strike targets available");
         }
@@ -33,7 +33,7 @@ public class FixedScript implements Script {
     }
 
     @Override
-    public FighterBodyPart parry(Fighter self, Fighter opponent) {
+    public BodyPart parry(Fighter self, Fighter opponent) {
         if (parryTargets.isEmpty()) {
             throw new IllegalStateException("No more parry targets available");
         }
