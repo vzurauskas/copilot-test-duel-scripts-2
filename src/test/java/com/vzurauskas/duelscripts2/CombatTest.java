@@ -350,8 +350,8 @@ class CombatTest {
         alice.strike(bob);
         
         assertEquals(1, alice.strikesCarriedOut().size());
-        Strike expectedFirstStrike = new Strike(
-            alice, bob.head(), 5, false, bob.torso()
+        Strike expectedFirstStrike = Strike.hit(
+            alice, bob.head(), 5, false
         );
         assertEquals(expectedFirstStrike, alice.strikesCarriedOut().get(0));
         
@@ -359,9 +359,7 @@ class CombatTest {
         alice.strike(bob);
         
         assertEquals(2, alice.strikesCarriedOut().size());
-        Strike expectedSecondStrike = new Strike(
-            alice, bob.torso(), 0, false, bob.torso()
-        );
+        Strike expectedSecondStrike = Strike.parried(alice, bob.torso());
         assertEquals(expectedSecondStrike, alice.strikesCarriedOut().get(1));
     }
     
@@ -386,8 +384,8 @@ class CombatTest {
         alice.strike(bob);
         
         assertEquals(1, bob.strikesSuffered().size());
-        Strike expectedFirstStrike = new Strike(
-            alice, bob.head(), 12, true, bob.torso()
+        Strike expectedFirstStrike = Strike.hit(
+            alice, bob.head(), 12, true
         );
         assertEquals(expectedFirstStrike, bob.strikesSuffered().get(0));
         
@@ -396,8 +394,8 @@ class CombatTest {
         alice.strike(bob);
         
         assertEquals(2, bob.strikesSuffered().size());
-        Strike expectedSecondStrike = new Strike(
-            alice, bob.torso(), 3, false, bob.head()
+        Strike expectedSecondStrike = Strike.hit(
+            alice, bob.torso(), 3, false
         );
         assertEquals(expectedSecondStrike, bob.strikesSuffered().get(1));
     }
