@@ -46,11 +46,11 @@ public class Fighter {
         this.parryingBodyPart = script.parry(this, opponent);
     }
 
-    public void strike(Fighter target) {
-        BodyPart targetBodyPart = script.strike(this, target);
-        Strike strike = weapon.strike(this, targetBodyPart);
+    public void strike(Fighter defender) {
+        BodyPart target = script.strike(this, defender);
+        Strike strike = target.receiveStrike(this);
         strikesCarriedOut.add(strike);
-        target.takeHit(strike);
+        defender.takeHit(strike);
     }
 
     public void takeHit(Strike strike) {
@@ -72,7 +72,7 @@ public class Fighter {
         return strikesSuffered;
     }
 
-    public Weapon getWeapon() {
+    public Weapon weapon() {
         return weapon;
     }
 

@@ -46,7 +46,7 @@ public class Strike {
         String parriedSuffix = wasParried() ? " - BLOCKED by parry." : "";
         
         return "%s strikes %s with %s for %d damage%s%s".formatted(
-            striker.name(), target, striker.getWeapon().name(), 
+            striker.name(), target, striker.weapon().name(), 
             damage, criticalHitSuffix, parriedSuffix
         );
     }

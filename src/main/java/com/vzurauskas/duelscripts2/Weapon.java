@@ -19,11 +19,7 @@ public class Weapon {
         return name;
     }
 
-    public Strike strike(Fighter striker, BodyPart target) {
-        return target.receiveStrike(this, striker);
-    }
-
-    public Strike hitStrike(Fighter striker, BodyPart target) {
+    public Strike hit(Fighter striker, BodyPart target) {
         int baseDamage = target.calculateBaseDamage(damage);
         boolean isCritical = Math.random() < criticalHitChance;
         int finalDamage = isCritical ? baseDamage * 2 : baseDamage;

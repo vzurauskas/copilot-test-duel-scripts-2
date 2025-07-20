@@ -37,11 +37,11 @@ public final class BodyPart {
         return fighter;
     }
 
-    public Strike receiveStrike(Weapon weapon, Fighter striker) {
+    public Strike receiveStrike(Fighter striker) {
         if (this.isBeingParried()) {
             return Strike.parried(striker, this);
         } else {
-            return weapon.hitStrike(striker, this);
+            return striker.weapon().hit(striker, this);
         }
     }
 
