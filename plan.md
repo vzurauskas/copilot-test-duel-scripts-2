@@ -148,3 +148,5 @@ After completing the current FighterBodyPart refactoring, consider these domain 
 
 These improvements would further encapsulate behavior in domain objects and reduce coupling between classes.
 
+### Next
+- Remove `defender` from `Strike`.

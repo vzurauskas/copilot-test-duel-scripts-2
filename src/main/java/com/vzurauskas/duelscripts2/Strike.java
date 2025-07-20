@@ -3,10 +3,10 @@ package com.vzurauskas.duelscripts2;
 public class Strike {
     private final Fighter striker;
     private final Fighter defender;
-    private final BodyPart target;
+    private final FighterBodyPart target;
     private final int damage;
     private final boolean criticalHit;
-    private final BodyPart parried;
+    private final FighterBodyPart parried;
 
     public Strike(
         Fighter striker, FighterBodyPart target, int damage, 
@@ -14,10 +14,10 @@ public class Strike {
     ) {
         this.striker = striker;
         this.defender = target.fighter();
-        this.target = target.bodyPart();
+        this.target = target;
         this.damage = damage;
         this.criticalHit = criticalHit;
-        this.parried = parried.bodyPart();
+        this.parried = parried;
     }
 
     public int damage() {
@@ -25,7 +25,7 @@ public class Strike {
     }
 
     public boolean wasParried() {
-        return parried == target;
+        return parried.equals(target);
     }
 
     public String damageReport() {
@@ -36,8 +36,8 @@ public class Strike {
         String criticalHitSuffix = criticalHit ? " (critical hit!)" : "";
         String parriedSuffix = wasParried() ? " - BLOCKED by parry." : "";
         
-        return "%s strikes %s's %s with %s for %d damage%s%s".formatted(
-            striker.name(), defender.name(), target, striker.getWeapon().name(), 
+        return "%s strikes %s with %s for %d damage%s%s".formatted(
+            striker.name(), target, striker.getWeapon().name(), 
             damage, criticalHitSuffix, parriedSuffix
         );
     }
@@ -51,8 +51,8 @@ public class Strike {
                criticalHit == strike.criticalHit &&
                striker.equals(strike.striker) &&
                defender.equals(strike.defender) &&
-               target == strike.target &&
-               parried == strike.parried;
+               target.equals(strike.target) &&
+               parried.equals(strike.parried);
     }
 
     @Override
