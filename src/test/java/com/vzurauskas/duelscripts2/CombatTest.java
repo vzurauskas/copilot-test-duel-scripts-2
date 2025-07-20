@@ -283,14 +283,14 @@ class CombatTest {
         
         assertTrue(
             description.contains(
-                "Alice strikes Bob's HEAD with Sword for 34 damage " +
+                "Alice strikes Bob's head with Sword for 34 damage " +
                 "(critical hit!)"
             ),
             "Expected Alice's strike description. Actual: " + description
         );
         assertTrue(
             description.contains(
-                "Bob strikes Alice's TORSO with Axe for 0 damage - " +
+                "Bob strikes Alice's torso with Axe for 0 damage - " +
                 "BLOCKED by parry."
             ),
             "Expected Bob's blocked strike description. Actual: " + description
@@ -318,7 +318,7 @@ class CombatTest {
         
         assertTrue(
             description.contains(
-                "Charlie strikes Diana's TORSO with Mace for 0 damage - " +
+                "Charlie strikes Diana's torso with Mace for 0 damage - " +
                 "BLOCKED by parry."
             ),
             "Expected description to contain Charlie's blocked strike. " +
@@ -326,7 +326,7 @@ class CombatTest {
         );
         assertTrue(
             description.contains(
-                "Diana strikes Charlie's LEGS with Dagger for 8 damage " +
+                "Diana strikes Charlie's legs with Dagger for 8 damage " +
                 "(critical hit!)"
             ),
             "Expected description to contain Diana's critical strike. " +

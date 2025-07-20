@@ -1,40 +1,40 @@
 package com.vzurauskas.duelscripts2;
 
-public class FighterBodyPart {
+public final class FighterBodyPart {
     private final Fighter fighter;
-    private final BodyPart bodyPart;
+    private final double multiplier;
+    private final String name;
 
-    public FighterBodyPart(Fighter fighter, BodyPart bodyPart) {
+    private FighterBodyPart(
+        Fighter fighter, double multiplier, String name
+    ) {
         this.fighter = fighter;
-        this.bodyPart = bodyPart;
+        this.multiplier = multiplier;
+        this.name = name;
+    }
+
+    public static FighterBodyPart head(Fighter fighter) {
+        return new FighterBodyPart(fighter, 1.7, "head");
+    }
+
+    public static FighterBodyPart torso(Fighter fighter) {
+        return new FighterBodyPart(fighter, 1.0, "torso");
+    }
+
+    public static FighterBodyPart legs(Fighter fighter) {
+        return new FighterBodyPart(fighter, 0.5, "legs");
+    }
+
+    public int calculateBaseDamage(int weaponDamage) {
+        return (int) (weaponDamage * multiplier);
+    }
+
+    public boolean isBeingParried() {
+        return this.equals(fighter.parryingFighterBodyPart());
     }
 
     public Fighter fighter() {
         return fighter;
-    }
-
-    public BodyPart bodyPart() {
-        return bodyPart;
-    }
-
-    public boolean isBeingParried() {
-        return fighter.parryingFighterBodyPart().equals(this);
-    }
-
-    public int calculateBaseDamage(int weaponDamage) {
-        return (int)(weaponDamage * bodyPart.multiplier());
-    }
-
-    public static FighterBodyPart head(Fighter fighter) {
-        return new FighterBodyPart(fighter, BodyPart.HEAD);
-    }
-
-    public static FighterBodyPart torso(Fighter fighter) {
-        return new FighterBodyPart(fighter, BodyPart.TORSO);
-    }
-
-    public static FighterBodyPart legs(Fighter fighter) {
-        return new FighterBodyPart(fighter, BodyPart.LEGS);
     }
 
     @Override
@@ -42,16 +42,18 @@ public class FighterBodyPart {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         FighterBodyPart that = (FighterBodyPart) obj;
-        return fighter.equals(that.fighter) && bodyPart == that.bodyPart;
+        return Double.compare(that.multiplier, multiplier) == 0 && 
+               fighter.equals(that.fighter) && 
+               name.equals(that.name);
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(fighter, bodyPart);
+        return java.util.Objects.hash(fighter, multiplier, name);
     }
 
     @Override
     public String toString() {
-        return "%s's %s".formatted(fighter.name(), bodyPart);
+        return "%s's %s".formatted(fighter.name(), name);
     }
 }
