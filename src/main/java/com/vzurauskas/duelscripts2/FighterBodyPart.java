@@ -25,6 +25,18 @@ public class FighterBodyPart {
         return (int)(weaponDamage * bodyPart.multiplier());
     }
 
+    public static FighterBodyPart head(Fighter fighter) {
+        return new FighterBodyPart(fighter, BodyPart.HEAD);
+    }
+
+    public static FighterBodyPart torso(Fighter fighter) {
+        return new FighterBodyPart(fighter, BodyPart.TORSO);
+    }
+
+    public static FighterBodyPart legs(Fighter fighter) {
+        return new FighterBodyPart(fighter, BodyPart.LEGS);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

@@ -19,7 +19,7 @@ public class Fighter {
     public Fighter(String name, int hitPoints, Script script) {
         this.name = name;
         this.hitPoints = hitPoints;
-        this.parryingBodyPart = new FighterBodyPart(this, BodyPart.TORSO);
+        this.parryingBodyPart = FighterBodyPart.torso(this);
         this.weapon = new Weapon("Fist", 3);
         this.strikesCarriedOut = new ArrayList<>();
         this.strikesSuffered = new ArrayList<>();
@@ -77,22 +77,18 @@ public class Fighter {
     }
 
     public FighterBodyPart head() {
-        return new FighterBodyPart(this, BodyPart.HEAD);
+        return FighterBodyPart.head(this);
     }
 
     public FighterBodyPart torso() {
-        return new FighterBodyPart(this, BodyPart.TORSO);
+        return FighterBodyPart.torso(this);
     }
 
     public FighterBodyPart legs() {
-        return new FighterBodyPart(this, BodyPart.LEGS);
+        return FighterBodyPart.legs(this);
     }
 
     public FighterBodyPart parryingFighterBodyPart() {
         return parryingBodyPart;
-    }
-
-    public FighterBodyPart bodyPart(BodyPart bodyPart) {
-        return new FighterBodyPart(this, bodyPart);
     }
 }
