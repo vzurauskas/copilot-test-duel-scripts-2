@@ -10,7 +10,7 @@ class CombatTest {
     void oneStrikesAnotherInHead() {
         Fighter alice = new Fighter(
             "Alice", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+            new FixedScript(Fighter::head, Fighter::torso)
         );
         Fighter bob = new Fighter("Bob", 100);
         
@@ -23,11 +23,11 @@ class CombatTest {
     void parryBlocksStrike() {
         Fighter alice = new Fighter(
             "Alice", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+            new FixedScript(Fighter::head, Fighter::torso)
         );
         Fighter bob = new Fighter(
             "Bob", 100, 
-            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+            new FixedScript(Fighter::torso, Fighter::head)
         );
         
         bob.parry(alice);
@@ -40,11 +40,11 @@ class CombatTest {
     void bothStrikesLandWhenNoParrying() {
         Fighter alice = new Fighter(
             "Alice", 100, 
-            new FixedScript(BodyPart.TORSO, BodyPart.LEGS)
+            new FixedScript(Fighter::torso, Fighter::legs)
         );
         Fighter bob = new Fighter(
             "Bob", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.HEAD)
+            new FixedScript(Fighter::head, Fighter::head)
         );
         
         alice.parry(bob);
@@ -60,11 +60,11 @@ class CombatTest {
     void bothStrikesAreBlockedWhenParrying() {
         Fighter alice = new Fighter(
             "Alice", 100, 
-            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+            new FixedScript(Fighter::torso, Fighter::head)
         );
         Fighter bob = new Fighter(
             "Bob", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+            new FixedScript(Fighter::head, Fighter::torso)
         );
         
         alice.parry(bob);
@@ -81,21 +81,21 @@ class CombatTest {
         Fighter alice = new Fighter(
             "Alice", 100,
             new FixedScript(
-                List.of(BodyPart.HEAD, BodyPart.TORSO, BodyPart.LEGS), 
-                List.of(BodyPart.TORSO)
+                List.of(Fighter::head, Fighter::torso, Fighter::legs), 
+                List.of(Fighter::torso)
             )
         );
         Fighter bob = new Fighter(
             "Bob", 100, 
-            new FixedScript(BodyPart.TORSO, BodyPart.TORSO)
+            new FixedScript(Fighter::torso, Fighter::torso)
         );
         Fighter charlie = new Fighter(
             "Charlie", 100, 
-            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+            new FixedScript(Fighter::torso, Fighter::head)
         );
         Fighter dave = new Fighter(
             "Dave", 100, 
-            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+            new FixedScript(Fighter::torso, Fighter::head)
         );
         
         bob.parry(alice);
@@ -127,7 +127,7 @@ class CombatTest {
         Fighter alice = new Fighter("Alice", 1);
         Fighter bob = new Fighter(
             "Bob", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+            new FixedScript(Fighter::head, Fighter::torso)
         );
         
         assertTrue(alice.isAlive());
@@ -141,12 +141,12 @@ class CombatTest {
     void weaponAffectsDamageCalculation() {
         Fighter alice = new Fighter(
             "Alice", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+            new FixedScript(Fighter::head, Fighter::torso)
         );
         Fighter bob = new Fighter("Bob", 100);
         Fighter charlie = new Fighter(
             "Charlie", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+            new FixedScript(Fighter::head, Fighter::torso)
         );
         
         // Alice has no weapon (base damage)
@@ -165,7 +165,7 @@ class CombatTest {
     void damageCalculationUsesMultiplicativeFormula() {
         Fighter alice = new Fighter(
             "Alice", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+            new FixedScript(Fighter::head, Fighter::torso)
         );
         Fighter bob = new Fighter("Bob", 100);
         
@@ -182,7 +182,7 @@ class CombatTest {
     void criticalHitDealsDoubleDamage() {
         Fighter alice = new Fighter(
             "Alice", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+            new FixedScript(Fighter::head, Fighter::torso)
         );
         Fighter bob = new Fighter("Bob", 100);
         
@@ -201,11 +201,11 @@ class CombatTest {
     void complexCombatScenarioWorksCorrectly() {
         Fighter alice = new Fighter(
             "Alice", 100, 
-            new FixedScript(BodyPart.TORSO, BodyPart.LEGS)
+            new FixedScript(Fighter::torso, Fighter::legs)
         );
         Fighter bob = new Fighter(
             "Bob", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.HEAD)
+            new FixedScript(Fighter::head, Fighter::head)
         );
         
         alice.equipWeapon(new Weapon("Sword", 8));
@@ -241,12 +241,12 @@ class CombatTest {
     void combatResultContainsDamageDealt() {
         Fighter alice = new Fighter(
             "Alice", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+            new FixedScript(Fighter::head, Fighter::torso)
         );
         
         Fighter bob = new Fighter(
             "Bob", 100, 
-            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+            new FixedScript(Fighter::torso, Fighter::head)
         );
         
         // Set up weapons - doesn't matter much since both 
@@ -265,12 +265,12 @@ class CombatTest {
     void combatResultContainsStrikeOutcomes() {
         Fighter alice = new Fighter(
             "Alice", 100, 
-            new FixedScript(BodyPart.HEAD, BodyPart.TORSO)
+            new FixedScript(Fighter::head, Fighter::torso)
         );
         
         Fighter bob = new Fighter(
             "Bob", 100, 
-            new FixedScript(BodyPart.TORSO, BodyPart.LEGS)
+            new FixedScript(Fighter::torso, Fighter::legs)
         );
         
         alice.equipWeapon(new Weapon("Sword", 10, 1.0));
@@ -301,11 +301,11 @@ class CombatTest {
     void combatResultForDifferentFightersContainsStrikeOutcomes() {
         Fighter charlie = new Fighter(
             "Charlie", 100, 
-            new FixedScript(BodyPart.TORSO, BodyPart.HEAD)
+            new FixedScript(Fighter::torso, Fighter::head)
         );
         Fighter diana = new Fighter(
             "Diana", 100, 
-            new FixedScript(BodyPart.LEGS, BodyPart.TORSO)
+            new FixedScript(Fighter::legs, Fighter::torso)
         );
         
         charlie.equipWeapon(new Weapon("Mace", 15));
@@ -339,12 +339,12 @@ class CombatTest {
         Fighter alice = new Fighter(
             "Alice", 100,
             new FixedScript(
-                List.of(BodyPart.HEAD, BodyPart.TORSO), 
-                List.of(BodyPart.TORSO)
+                List.of(Fighter::head, Fighter::torso), 
+                List.of(Fighter::torso)
             )
         );
         Fighter bob = new Fighter(
-            "Bob", 100, new FixedScript(BodyPart.TORSO, BodyPart.TORSO)
+            "Bob", 100, new FixedScript(Fighter::torso, Fighter::torso)
         );
         
         alice.strike(bob);
@@ -370,15 +370,15 @@ class CombatTest {
         Fighter alice = new Fighter(
             "Alice", 100, 
             new FixedScript(
-                List.of(BodyPart.HEAD, BodyPart.TORSO), 
-                List.of(BodyPart.TORSO)
+                List.of(Fighter::head, Fighter::torso), 
+                List.of(Fighter::torso)
             )
         );
         Fighter bob = new Fighter(
             "Bob", 100,
             new FixedScript(
-                List.of(BodyPart.TORSO), 
-                List.of(BodyPart.HEAD)
+                List.of(Fighter::torso), 
+                List.of(Fighter::head)
             )
         );
         

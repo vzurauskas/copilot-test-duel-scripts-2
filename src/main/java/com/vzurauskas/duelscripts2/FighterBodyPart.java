@@ -21,6 +21,10 @@ public class FighterBodyPart {
         return fighter.parryingFighterBodyPart().equals(this);
     }
 
+    public int calculateBaseDamage(int weaponDamage) {
+        return (int)(weaponDamage * bodyPart.multiplier());
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

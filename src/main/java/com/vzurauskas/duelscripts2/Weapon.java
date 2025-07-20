@@ -23,7 +23,7 @@ public class Weapon {
         if (target.isBeingParried()) {
             return new Strike(striker, target, 0, false, target);
         } else {
-            int baseDamage = (int)(damage * target.bodyPart().multiplier());
+            int baseDamage = target.calculateBaseDamage(damage);
             boolean isCritical = Math.random() < criticalHitChance;
             int finalDamage = isCritical ? baseDamage * 2 : baseDamage;
             return new Strike(
