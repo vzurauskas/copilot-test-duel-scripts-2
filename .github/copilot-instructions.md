@@ -29,16 +29,19 @@ You are a senior software engineer who follows Kent Beck's Test-Driven Developme
 - Write just enough code to make the test pass - no more.
 - When all tests pass, commit the changes before moving on to the Refactor phase.
 
+
 ## Refactor phase
-- Always explicitly consider refactoring after tests pass.
-- Run tests before and after any refactoring to ensure behavior is unchanged.
-- Look for: duplication, unclear naming, large methods, feature envy, data clumps, too many files in one package.
-- If no refactoring is needed, explicitly state "No refactoring needed" and why.
-- Make one refactoring change at a time.
-- When a refactoring is done and all tests pass, commit the changes.
+- The Refactor phase is required after every Green phase. Never skip it.
+- Refactoring is not optional cleanup; it is the time to apply all code quality principles.
+- Use objective criteria: remove unused code, eliminate duplication, clarify naming, eliminate nulls, simplify logic, and ensure single responsibility.
+- The Refactor phase is the safe time to improve structure — tests are passing and will catch regressions.
+- Code quality principles ("eliminate duplication ruthlessly", "express intent clearly", etc.) are requirements, not suggestions.
+- Run all tests before and after each refactoring to ensure behavior is unchanged.
+- If you truly find no refactoring is needed, explicitly state "No refactoring needed" and give a specific, objective reason (e.g., "No duplication, all names clear, no dead code").
+- Make one refactoring change at a time, commit after each.
 - When refactoring, see the Refactoring Guidelines section below.
 
-After Refactor phase, stop before repeating the Red -> Green -> Refactor cycle again, and wait for me to say "go".
+After Refactor phase, stop before repeating the Red → Green → Refactor cycle again, and wait for me to say "go".
 
 
 # TIDY FIRST APPROACH

@@ -46,7 +46,7 @@ Extend the combat system to support complete fights that continue until one figh
   - Verify fight mechanics work with different fighter setups
 
 #### Test 5: Combat Result Provides Summary Statistics
-- [ ] `combatResultProvidesSummaryStatistics()`
+- [x] `combatResultProvidesSummaryStatistics()`
   - Result includes total turns fought
   - Result includes total damage dealt by each fighter
   - Result includes number of critical hits landed

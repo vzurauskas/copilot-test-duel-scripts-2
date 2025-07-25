@@ -36,6 +36,10 @@ public class Strike {
     public boolean wasParried() {
         return wasParried;
     }
+    
+    public boolean isCritical() {
+        return criticalHit;
+    }
 
     public String damageReport() {
         return "%s: %d damage".formatted(target.fighter().name(), wasParried() ? 0 : damage);

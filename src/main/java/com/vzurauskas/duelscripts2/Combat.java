@@ -37,6 +37,6 @@ public class Combat {
             turnHistory.add(nextTurn());
         }
         Fighter winner = fighter1.isAlive() ? fighter1 : fighter2;
-        return new CombatResult(winner, turnHistory);
+        return new CombatResult(winner, fighter1, fighter2, turnHistory);
     }
 }

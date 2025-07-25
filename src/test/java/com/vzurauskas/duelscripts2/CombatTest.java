@@ -504,4 +504,39 @@ class CombatTest {
             "Charlie with more HP should win but got: " + result.toString()
         );
     }
+    
+    @Test
+    void combatResultProvidesSummaryStatistics() {
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        alice.equipWeapon(new Weapon("Critical Sword", 8, 1.0));
+        bob.equipWeapon(new Weapon("Normal Axe", 6));
+        
+        Combat combat = new Combat(alice, bob);
+        CombatResult result = combat.fight();
+        
+        String output = result.toString();
+        
+        assertTrue(
+            output.contains("Total turns: "),
+            "Result should contain total turns count but got: " + output
+        );
+        assertTrue(
+            output.contains("Alice total damage: "),
+            "Result should contain Alice's total damage but got: " + output
+        );
+        assertTrue(
+            output.contains("Bob total damage: "),
+            "Result should contain Bob's total damage but got: " + output
+        );
+        assertTrue(
+            output.contains("Alice critical hits: "),
+            "Result should contain Alice's critical hits count but got: " + output
+        );
+        assertTrue(
+            output.contains("Bob critical hits: "),
+            "Result should contain Bob's critical hits count but got: " + output
+        );
+    }
 }
