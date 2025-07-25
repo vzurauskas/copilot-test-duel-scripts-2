@@ -417,4 +417,23 @@ class CombatTest {
             "One fighter should be alive"
         );
     }
+    
+    @Test
+    void combatResultContainsWinnerInformation() {
+        Fighter alice = new Fighter("Alice", 150);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        Combat combat = new Combat(alice, bob);
+        CombatResult result = combat.fight();
+        
+        String output = result.toString();
+        assertTrue(
+            output.contains("Alice wins"),
+            "Result should identify Alice as winner"
+        );
+        assertTrue(
+            output.contains("Fight is over"),
+            "Result should indicate fight is over"
+        );
+    }
 }

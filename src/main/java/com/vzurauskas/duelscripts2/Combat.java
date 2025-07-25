@@ -26,6 +26,7 @@ public class Combat {
         while (fighter1.isAlive() && fighter2.isAlive()) {
             nextTurn();
         }
-        return new CombatResult();
+        Fighter winner = fighter1.isAlive() ? fighter1 : fighter2;
+        return new CombatResult(winner);
     }
 }
