@@ -539,4 +539,41 @@ class CombatTest {
             "Result should contain Bob's critical hits count but got: " + output
         );
     }
+    
+    @Test
+    void combatHandlesSimultaneousDeath() {
+        Fighter eve = new Fighter(
+            "Eve", 10,
+            new FixedScript(
+                List.of(Fighter::head),
+                List.of(Fighter::torso)
+            )
+        );
+        Fighter frank = new Fighter(
+            "Frank", 10,
+            new FixedScript(
+                List.of(Fighter::head),
+                List.of(Fighter::torso)
+            )
+        );
+        eve.equipWeapon(new Weapon("Lethal Blade", 20));
+        frank.equipWeapon(new Weapon("Lethal Blade", 20));
+
+        Combat combat = new Combat(eve, frank);
+        CombatResult result = combat.fight();
+        String output = result.toString();
+
+        assertFalse(
+            eve.isAlive(),
+             "Eve should be dead after simultaneous lethal blows"
+        );
+        assertFalse(
+            frank.isAlive(),
+            "Frank should be dead after simultaneous lethal blows"
+        );
+        assertTrue(
+            output.contains("The fight ended in a draw. Both fighters are dead!"),
+            "Result should indicate a draw/tie but got: " + output
+        );
+    }
 }

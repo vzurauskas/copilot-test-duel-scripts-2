@@ -52,7 +52,7 @@ Extend the combat system to support complete fights that continue until one figh
   - Result includes number of critical hits landed
 
 #### Test 6: Combat Handles Edge Case of Simultaneous Death
-- [ ] `combatHandlesSimultaneousDeath()`
+- [x] `combatHandlesSimultaneousDeath()`
   - Both fighters deal lethal damage in same turn
   - Fight ends appropriately
   - Result handles draw/tie scenario
