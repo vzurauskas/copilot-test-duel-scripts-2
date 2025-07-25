@@ -428,12 +428,48 @@ class CombatTest {
         
         String output = result.toString();
         assertTrue(
+            output.contains("=== Final Result ==="),
+            "Result should contain final result section but got: " + output
+        );
+        assertTrue(
             output.contains("Alice wins"),
             "Result should identify Alice as winner"
         );
         assertTrue(
             output.contains("Fight is over"),
             "Result should indicate fight is over"
+        );
+    }
+    
+    @Test
+    void combatResultContainsTurnHistory() {
+        Fighter alice = new Fighter("Alice", 150);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        Combat combat = new Combat(alice, bob);
+        CombatResult result = combat.fight();
+        
+        String output = result.toString();
+        
+        assertTrue(
+            output.contains("=== Turn 1 ==="),
+            "Result should contain turn headers but got: " + output
+        );
+        assertTrue(
+            output.contains("Alice strikes Bob's head with Fist"),
+            "Result should contain Alice's strike description but got: " + output
+        );
+        assertTrue(
+            output.contains("Bob strikes Alice's head with Fist"),
+            "Result should contain Bob's strike description but got: " + output
+        );
+        assertTrue(
+            output.contains("5 damage"),
+            "Result should contain specific damage amounts but got: " + output
+        );
+        assertTrue(
+            output.contains("Alice: 5 damage") || output.contains("Bob: 5 damage"),
+            "Result should contain damage summary for fighters but got: " + output
         );
     }
 }

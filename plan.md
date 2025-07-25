@@ -34,7 +34,7 @@ Extend the combat system to support complete fights that continue until one figh
   - Result should indicate the fight is over
 
 #### Test 3: Combat Result Contains Turn History
-- [ ] `combatResultContainsTurnHistory()`
+- [x] `combatResultContainsTurnHistory()`
   - Complete fight generates multiple turns
   - Result contains all turn results from the fight
   - Can review what happened each turn
