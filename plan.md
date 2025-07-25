@@ -40,7 +40,7 @@ Extend the combat system to support complete fights that continue until one figh
   - Can review what happened each turn
 
 #### Test 4: Combat Handles Uneven Fighter Strengths
-- [ ] `combatHandlesUnevenFighterStrengths()`
+- [x] `combatHandlesUnevenFighterStrengths()`
   - Fighter with stronger weapon wins consistently
   - Fighter with more HP has advantage
   - Verify fight mechanics work with different fighter setups

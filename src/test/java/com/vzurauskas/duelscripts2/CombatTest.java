@@ -472,4 +472,36 @@ class CombatTest {
             "Result should contain damage summary for fighters but got: " + output
         );
     }
+    
+    @Test
+    void combatHandlesUnevenFighterStrengths() {
+        // Fighter with stronger weapon should have advantage
+        Fighter alice = new Fighter("Alice", 100);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        alice.equipWeapon(new Weapon("Strong Sword", 20));
+        bob.equipWeapon(new Weapon("Weak Dagger", 5));
+        
+        Combat combat = new Combat(alice, bob);
+        CombatResult result = combat.fight();
+        
+        assertTrue(
+            alice.isAlive() && !bob.isAlive(),
+            "Alice with stronger weapon should win but got: " + result.toString()
+        );
+    }
+    
+    @Test
+    void fighterWithMoreHitPointsHasAdvantage() {
+        Fighter charlie = new Fighter("Charlie", 200);
+        Fighter diana = new Fighter("Diana", 50);
+        
+        Combat combat = new Combat(charlie, diana);
+        CombatResult result = combat.fight();
+        
+        assertTrue(
+            charlie.isAlive() && !diana.isAlive(),
+            "Charlie with more HP should win but got: " + result.toString()
+        );
+    }
 }
