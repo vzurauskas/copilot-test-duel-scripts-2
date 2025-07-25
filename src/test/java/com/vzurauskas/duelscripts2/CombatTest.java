@@ -399,4 +399,22 @@ class CombatTest {
         );
         assertEquals(expectedSecondStrike, bob.strikesSuffered().get(1));
     }
+    
+    @Test
+    void fightContinuesUntilOneFighterDies() {
+        Fighter alice = new Fighter("Alice", 150);
+        Fighter bob = new Fighter("Bob", 100);
+        
+        Combat combat = new Combat(alice, bob);
+        CombatResult result = combat.fight();
+        
+        assertTrue(
+            !alice.isAlive() || !bob.isAlive(),
+            "One fighter should be dead"
+        );
+        assertTrue(
+            alice.isAlive() || bob.isAlive(),
+            "One fighter should be alive"
+        );
+    }
 }

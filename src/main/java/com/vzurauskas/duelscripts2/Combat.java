@@ -21,4 +21,11 @@ public class Combat {
             fighter2.lastStrikeCarriedOut()
         );
     }
+    
+    public CombatResult fight() {
+        while (fighter1.isAlive() && fighter2.isAlive()) {
+            nextTurn();
+        }
+        return new CombatResult();
+    }
 }
